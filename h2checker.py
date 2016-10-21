@@ -21,17 +21,17 @@ def checkH2(domain):
         r = requests.get('http://' + domain, headers=headers, allow_redirects=True)
     # except ConnectionError:
     except IOError:
-        print("Failed to open URL")
+        #response = "Failed to open URL"
+        return 2
     else:
-        print(r.history)
-        print(r.url)
-
         # check the status code if it is 101 Switching Protocols based on http1.1 first
         if r.status_code == 101:
-            print('This domain supports HTTP/2 with h2c - HTTP')
+            return 0
+            #response = 'This domain supports HTTP/2 with h2c - HTTP'
         # the status code must be 200 ok or something else based on http1.1 if the server does not support http/2
         else:
-            print('This domain does not support HTTP/2 with h2c - HTTP')
+            return 1
+            #response = 'This domain does not support HTTP/2 with h2c - HTTP'
 
 
 # http/2 check with h2
@@ -52,24 +52,31 @@ def checkH2S(domain):
         conn.connect((domain, 443))
     except ConnectionRefusedError:
         # print('Connection refused error')
-        print('HTTP/2 test not possible. Host not found or connection refused.')
+        return 5
+        #response = 'HTTP/2 test not possible. Host not found or connection refused.'
     except socket.timeout:
         # print('response timeout')
-        print('HTTP/2 test not possible. Host not found or connection refused.')
+        #response = 'HTTP/2 test not possible. Host not found or connection refused.'
+        return 5
     except ssl.CertificateError:
         # print(ssl.CertificateError)
-        print('HTTP/2 test not possible. Host not found or connection refused.')
+        return 5
+        #response = 'HTTP/2 test not possible. Host not found or connection refused.'
     except ssl.SSLError:
+        return 5
         # print(ssl.SSLError)
-        print('HTTP/2 test not possible. Host not found or connection refused.')
+        #response = 'HTTP/2 test not possible. Host not found or connection refused.'
     except socket.gaierror:
         # print(socket.gaierror)
-        print('HTTP/2 test not possible. Host not found or connection refused.')
+        return 5
+        #response = 'HTTP/2 test not possible. Host not found or connection refused.'
     else:
         # check the selected protocol by the server
         if conn.selected_alpn_protocol() == 'h2':
-            print('This domain supports HTTP/2 with h2 - HTTPS')
+            return 3
+            #response = 'This domain supports HTTP/2 with h2 - HTTPS'
         else:
-            print('This domain does not support HTTP/2 with h2 - HTTPS but ' + str(conn.selected_alpn_protocol()))
+            return 4
+            #response = 'This domain does not support HTTP/2 with h2 - HTTPS but ' + str(conn.selected_alpn_protocol())
     finally:
         conn.close()

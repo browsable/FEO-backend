@@ -1,19 +1,31 @@
-from flask import Flask, render_template
-import h2checker
+from flask import Flask, render_template,request,redirect,url_for
+import h2checker,scraper
+
 app = Flask(__name__)
 
 @app.route('/')
 def main():
-    url = 'h2perf.com'
-    # h2 support checking
-    support = h2checker.checkH2(url)
-    support += h2checker.checkH2S(url)
-    return "<h1>%support</h1>"
+    return render_template('index-11.html')
 
-@app.route('/feo/')
-@app.route('/feo/<name>')
-def feo(name=None):
-    return render_template('index.html', name=name)
+@app.route('/feo', methods=['POST'])
+def feo():
+    url = request.form['url']
+    h2scheck = h2checker.checkH2S(url);
+
+    if(h2scheck==3):
+        notice = 'This domain supports HTTP/2'
+        return render_template('h2check.html', url=url, notice=notice)
+    elif(h2checker.checkH2(url)==2):
+        notice = 'Failed to open URL'
+        return render_template('h2check.html', url=url, notice=notice)
+    else:
+        #return redirect(url_for('scraping',url=url))
+        return 'scraping'
+
+@app.route('/scraping/')
+def scraping():
+    url = request.args.get('url')
+    return render_template('scraping.html',url=url)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',debug=True)
