@@ -20,6 +20,7 @@ def feo():
         return render_template('h2check.html', url=url, notice=notice)
     else:
         #return redirect(url_for('scraping',url=url))
+        scraper.scrap(url)
         return 'scraping'
 
 @app.route('/scraping/')

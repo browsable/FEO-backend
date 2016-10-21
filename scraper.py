@@ -5,7 +5,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 from pykeyboard import PyKeyboard
 
-def scrap(url):
+def scraper(url):
     display = Display(visible=0, size=(800,600))
     display.start()
     print('getURL')
