@@ -23,11 +23,14 @@ $(function () {
     $('#btsubmit').click(submit_form);
 
     $('input[name="url"]').bind('keydown', function(e) {
-      if (e.keyCode == 13) {
-          submit_form()
-      }
+        var url = $('input[name="url"]').val();
+        if(url!==""){
+        if (e.keyCode == 13) {
+          var url = $('input[name="url"]').val();
+            submit_form()
+      }}
+
     });
-    //$('input[name="url"]').focus();
 });
 
 
