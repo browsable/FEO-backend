@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def main():
-    return render_template('index-11.html')
+    return render_template('index.html')
 
 @app.route('/feo', methods=['POST'])
 def feo():
@@ -23,7 +23,7 @@ def feo():
         #scraper.scrap(url)
         return 'scraping'
 
-@app.route('/scraping/')
+@app.route('/scraping')
 def scraping():
     url = request.args.get('url')
     return render_template('scraping.html',url=url)
