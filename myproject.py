@@ -6,9 +6,9 @@ app = Flask(__name__)
 def main():
     return render_template('index.html')
 
-@app.route('/feo')
+@app.route('/feo', methods=['POST'])
 def feo():
-    url = request.args.get('url')
+    url = request.form['url']
     h2scheck = h2checker.checkH2S(url);
 
     if(h2scheck==3):
@@ -22,9 +22,9 @@ def feo():
         #scraper.scrap(url)
         return 'scraping'
 
-@app.route('/scraping', methods=['GET'])
+@app.route('/scraping')
 def scraping():
-    url = request.args.get('url')
+    url = request.args.get('inputURL')
     return render_template('scraping.html',url=url)
 
 if __name__ == '__main__':

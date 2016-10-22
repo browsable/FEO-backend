@@ -34,6 +34,10 @@ function reqHTTP(href, method) {
     // xmlHttp.setRequestHeader("Pragma", "no-cache");
     // xmlHttp.send("url=" + encodeURIComponent(inputURL));
     xmlHttp.open(method, url, true);
+    xmlHttp.setRequestHeader("Access-Control-Allow-Origin", "*");
+    xmlHttp.setRequestHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+    xmlHttp.setRequestHeader("Access-Control-Max-Age", "3600");
+    xmlHttp.setRequestHeader("Access-Control-Allow-Headers", "Origin,Accept,X-Requested-With,Content-Type,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization");
     xmlHttp.send(null);
 }
 
@@ -53,6 +57,10 @@ function reqScrapHTTP(href, method, inputURL) {
         }
     };
     xmlHttp.open(method, url, true);
+    xmlHttp.setRequestHeader("Access-Control-Allow-Origin", "*");
+    xmlHttp.setRequestHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+    xmlHttp.setRequestHeader("Access-Control-Max-Age", "3600");
+    xmlHttp.setRequestHeader("Access-Control-Allow-Headers", "Origin,Accept,X-Requested-With,Content-Type,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization");
     xmlHttp.send(null);
 }
 
