@@ -3,7 +3,7 @@ $(function () {
         event.preventDefault();
         var url = $('input[name="url"]').val();
         $.ajax({
-            url: 'https://www.h2perf.com/feo',
+            url: '/feo',
             data: $('form').serialize(),
             type: 'POST',
             contentType: 'application/x-www-form-urlencoded;charset=UTF-8',
