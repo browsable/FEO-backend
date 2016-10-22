@@ -1,7 +1,5 @@
-from flask import Flask,jsonify,render_template,request,redirect,url_for
-import h2checker,scraper,logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+from flask import Flask,render_template,request
+import h2checker,scraper
 app = Flask(__name__)
 
 @app.route('/')
@@ -10,7 +8,6 @@ def main():
 
 @app.route('/feo', methods=['POST'])
 def feo():
-    logger.info('feo module start')
     url = request.form['url']
     h2scheck = h2checker.checkH2S(url);
 
@@ -25,7 +22,7 @@ def feo():
         #scraper.scrap(url)
         return 'scraping'
 
-@app.route('/scraping')
+@app.route('/scraping', methods=['GET'])
 def scraping():
     url = request.args.get('url')
     return render_template('scraping.html',url=url)

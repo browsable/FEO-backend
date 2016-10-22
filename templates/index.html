@@ -96,13 +96,17 @@
                     <!-- SUBSCRIBE-FORM -->
                     <div class="subscribe-form subscribe-form-1" data-animOut="fadeOutUp" data-animIn="fadeInUp">
                         <h2 class="inputStyle">http(s)://www.</h2>
-                        <form autocomplete="on">
-                            <div class="field-group">
+                        <div class="field-group">
                                 <input class="form-control" type="text" name="url" placeholder="example.com"/>
-                                <button class="btn btn-glass" type="button" id="btsubmit">TEST</button>
-                            </div>
-                            <div class="msg-wrp"></div>
-                        </form>
+                                <button class="btn btn-glass" type="button" id="btsubmit" onclick=reqHTTP('/feo','POST')>TEST</button>
+                        </div>
+                        <!--<form autocomplete="on">-->
+                            <!--<div class="field-group">-->
+                                <!--<input class="form-control" type="text" name="url" placeholder="example.com"/>-->
+                                <!--<button class="btn btn-glass" type="button" id="btsubmit" onclick=reqHTTP('/users','DELETE','id=<%=data[i].id%>')">TEST</button>-->
+                            <!--</div>-->
+                            <!--<div class="msg-wrp"></div>-->
+                        <!--</form>-->
 
                     </div><!-- / SUBSCRIBE-FORM -->
                      <div class="navigation-wrp navigation-wrp-1">
@@ -522,7 +526,7 @@
 
 
 <!-- CUSTOM SCRIPT -->
-<script src="../static/js/urlsubmit.js"></script>
+<script src="../static/js/XMLHttpRequest.js"></script>
 
 </body>
 </html>
