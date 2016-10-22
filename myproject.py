@@ -6,9 +6,9 @@ app = Flask(__name__)
 def main():
     return render_template('index.html')
 
-@app.route('/feo', methods=['POST'])
+@app.route('/feo')
 def feo():
-    url = request.form['url']
+    url = request.args.get('url')
     h2scheck = h2checker.checkH2S(url);
 
     if(h2scheck==3):

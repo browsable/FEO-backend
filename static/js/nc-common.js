@@ -185,13 +185,13 @@ nc.countdown = function (obj) {
 		min   : parseInt($(obj).attr("data-min"),10),
 		sec   : parseInt($(obj).attr("data-sec"),10)
 	}
-
+	
 	var oneDay     = 24*60*60*1000; // hours*minutes*seconds*milliseconds
 	var firstDate  = new Date(config.year, config.month-1, config.day-1);
 	var d          = new Date();
 	var secondDate = new Date(d.getFullYear(), d.getMonth(), d.getDate());
 	var diffDays   = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
-
+	
 	var countdownHtml  = '<div class="inner-dashboard">';
 		countdownHtml += '	<!-- DAYS -->';
 		countdownHtml += '	<div class="dash days_dash">';
@@ -276,21 +276,21 @@ nc.animationIn = function(obj){
 /*----------  FORM  ----------*/
 nc.global_validation = {
 	form: '',
-	rules: {
-		email            : { required: true },
+	rules: { 
+		email            : { required: true, email: true },
 		name             : { required: true },
 		message          : { required: true },
 		phone            : { required: true, number: true },
 		date             : { required: true, date: true },
 	},
 	msg: {
-		email: {email: "Please, enter a valid domain"}
+		email: {email: "Please, enter a valid email"}
 	},
 	successMsg : "<div class='msg-success alert alert-success' role='alert'>Thank you for contact us. We will contact you as soon as possible.</div>",
 	errorMsg   : "<div class='msg-error alert alert-danger' role='alert'>Oops! Looks like something went wrong. Please try again later.</div>"
 }
 
-nc.formValidate = function (obj) {
+nc.formVaidate = function (obj) {
 	'use strict';
 	if (obj.msgpos == 'append') {
 		$(obj.form).validate({
@@ -324,13 +324,13 @@ nc.formValidate = function (obj) {
 			}
 		});
 	};
-
+	
 }
 
-	nc.resetForm = function (form) {
-		'use strict';
-		$(form).find('input[type="text"], input[type="email"], textarea').val(null);
-	}
+nc.resetForm = function (form) {
+	'use strict';
+	$(form).find('input[type="text"], input[type="email"], textarea').val(null);
+}
 
 nc.contactForm = function($form, formData, validate_data){
 	'use strict';
@@ -383,7 +383,7 @@ nc.formWidget = function (obj) {
 	var validate_data = nc.global_validation;
 	
 	// Form validation
-	nc.formValidate(validate_data);
+	nc.formVaidate(validate_data);
 
 	// Pop up form
 	// if (config.popup_selector) {
@@ -585,7 +585,7 @@ nc.scrollBar = function() {
 			});
 		}
 
-		/*----------  COUNTDOWN-CLOCK  ----------*/
+		/*----------  COUNTDOWN-CLOCK  ----------*/		
 		if (nc.elcheck(".countdown-widget")) {
 			var countdown = 0;
 			$(".countdown-widget").each(function(index, el) {
@@ -604,8 +604,8 @@ nc.scrollBar = function() {
 				rules: { email: { required: true, email: true } },
 				msg: {
 						email: {
-							required: "Please enter domian before submit.",
-							email: "Please, enter a valid domain"
+							required: "Please enter email before submit.",
+							email: "Please, enter a valid email"
 						}
 					},
 				msgpos: 'append',
@@ -618,7 +618,7 @@ nc.scrollBar = function() {
 				var formData = {
 					email: $subscribeForm.find('input').val()
 				}
-				nc.formValidate(subscribe_validate_data);
+				nc.formVaidate(subscribe_validate_data);
 				nc.contactForm($subscribeForm, formData, subscribe_validate_data);
 				return false;
 			});
