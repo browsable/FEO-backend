@@ -1,10 +1,12 @@
 $(function () {
-    $('#btsubmit').click(function () {
+    var submit_form = function () {
+        event.preventDefault();
         var url = $('input[name="url"]').val();
         $.ajax({
             url: '/feo',
             data: $('form').serialize(),
             type: 'POST',
+            contentType: 'application/x-www-form-urlencoded;charset=UTF-8',
             success: function (response) {
                 if(response=='scraping')
                     window.location.href = "/scraping?url="+url
@@ -16,12 +18,18 @@ $(function () {
             }
 
         });
+        $('input[name="url"]').focus().select();
+    };
+    $('#btsubmit').click(submit_form);
+
+    $('input[name="url"]').bind('keydown', function(e) {
+      if (e.keyCode == 13) {
+          submit_form()
+      }
     });
+    //$('input[name="url"]').focus();
 });
-function captureReturnKey(e) {
-    if (e.keyCode == 13 && e.srcElement.type != 'textarea')
-        return false;
-}
+
 
 /**
  * Created by browsable on 2016. 10. 20..
