@@ -8,8 +8,8 @@ $(function () {
             type: 'POST',
             contentType: 'application/x-www-form-urlencoded;charset=UTF-8',
             success: function (response) {
-                if(response=='scraping')
-                    window.location.href = "/scraping?url="+url
+                if (response == 'scraping')
+                    window.location.href = "/scraping?url=" + url
                 else
                     document.getElementById("content").innerHTML = response
             },
@@ -22,13 +22,15 @@ $(function () {
     };
     $('#btsubmit').click(submit_form);
 
-    $('input[name="url"]').bind('keydown', function(e) {
+    $('input[name="url"]').bind('keydown', function (e) {
         var url = $('input[name="url"]').val();
-        if(url!==""){
         if (e.keyCode == 13) {
-          var url = $('input[name="url"]').val();
-            submit_form()
-      }}
+            if (url !== "") {
+                submit_form()
+            } else {
+                e.preventDefault()
+            }
+        }
 
     });
 });
