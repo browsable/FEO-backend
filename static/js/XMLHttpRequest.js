@@ -13,10 +13,8 @@ function createXMLHttpRequest() {
 }
 function reqHTTP(href, method) {
     createXMLHttpRequest();
-    var inputURL = $('input[name="url"]').val();
-    var url = location.href;
-    url = url.substr(0, url.lastIndexOf('/'));
-    url += href + "?url=" + inputURL;
+    var inputURL = encodeURIComponent($('input[name="url"]').val());
+    var url = "https://www.h2perf.com"+href;
     xmlHttp.onreadystatechange = function () {
         if (xmlHttp.readyState == 4) {
             if (xmlHttp.status == 200) {
@@ -34,11 +32,12 @@ function reqHTTP(href, method) {
     // xmlHttp.setRequestHeader("Pragma", "no-cache");
     // xmlHttp.send("url=" + encodeURIComponent(inputURL));
     xmlHttp.open(method, url, true);
-    xmlHttp.setRequestHeader("Access-Control-Allow-Origin", "*");
+    xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+    xmlHttp.setRequestHeader("Access-Control-Allow-Origin", "https://www.");
     xmlHttp.setRequestHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
     xmlHttp.setRequestHeader("Access-Control-Max-Age", "3600");
     xmlHttp.setRequestHeader("Access-Control-Allow-Headers", "Origin,Accept,X-Requested-With,Content-Type,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization");
-    xmlHttp.send(null);
+    xmlHttp.send("url="+inputURL);
 }
 
 function reqScrapHTTP(href, method, inputURL) {
@@ -60,18 +59,18 @@ function reqScrapHTTP(href, method, inputURL) {
     xmlHttp.setRequestHeader("Access-Control-Allow-Origin", "*");
     xmlHttp.setRequestHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
     xmlHttp.setRequestHeader("Access-Control-Max-Age", "3600");
-    xmlHttp.setRequestHeader("Access-Control-Allow-Headers", "Origin,Accept,X-Requested-With,Content-Type,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization");
+    xmlHttp.setRequestHeader("Access-Control-Allow-Headers", "Access-Control-Request-Method,Access-Control-Request-Headers,Authorization");
     xmlHttp.send(null);
 }
-
-$('input[name="url"]').bind('keydown', function (e) {
-    var url = $('input[name="url"]').val();
-    if (e.keyCode == 13) {
-        if (url !== "") {
-            reqHTTP("/feo","GET")
-        } else {
-            e.preventDefault()
-        }
-    }
-
-});
+//
+// $('input[name="url"]').bind('keydown', function (e) {
+//     var url = $('input[name="url"]').val();
+//     if (e.keyCode == 13) {
+//         if (url !== "") {
+//             reqHTTP("/feo","GET")
+//         } else {
+//             e.preventDefault()
+//         }
+//     }
+//
+// });

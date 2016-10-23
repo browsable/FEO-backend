@@ -1,31 +1,40 @@
-from flask import Flask,render_template,request
+from flask import Flask,render_template,request,jsonify,current_app,redirect,url_for
 import h2checker,scraper
+from functools import wraps
 app = Flask(__name__)
+
 
 @app.route('/')
 def main():
-    return render_template('index.html')
-
-@app.route('/feo', methods=['POST'])
-def feo():
-    url = request.form['url']
-    h2scheck = h2checker.checkH2S(url);
-
-    if(h2scheck==3):
-        notice = 'This domain supports HTTP/2'
-        return render_template('h2check.html', url=url, notice=notice)
-    elif(h2checker.checkH2(url)==2):
-        notice = 'Failed to open URL'
-        return render_template('h2check.html', url=url, notice=notice)
+    url = request.args.get('url')
+    if(url==None or ""):
+        return render_template('index.html')
     else:
-        #return redirect(url_for('scraping',url=url))
-        #scraper.scrap(url)
-        return 'scraping'
+        h2scheck = h2checker.checkH2S(url)
+        if(h2scheck==3):
+            return jsonify(url=url, notice='This domain supports HTTP/2')
+        elif (h2checker.checkH2(url) == 2):
+            return jsonify(url=url, notice='Failed to open URL')
+        else:
+            scraper.scrap(url)
+            return jsonify(url=url, notice='scraping')
 
 @app.route('/scraping')
 def scraping():
-    url = request.args.get('inputURL')
+    url = request.args.get('url')
     return render_template('scraping.html',url=url)
+
+def support_jsonp(f):
+    """Wraps JSONified output for JSONP"""
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        callback = request.args.get('callback', False)
+        if callback:
+            content = str(callback) + '(' + str(f().data) + ')'
+            return current_app.response_class(content, mimetype='application/json')
+        else:
+            return f(*args, **kwargs)
+    return decorated_function
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)

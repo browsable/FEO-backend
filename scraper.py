@@ -3,27 +3,38 @@ from pyvirtualdisplay import Display
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
+import pyautogui
 from pykeyboard import PyKeyboard
 
 def scraper(url):
+    try:
+        split = str(url).split('.')
+        if(len(split)==1):
+            sitename = split[0]
+        elif(len(split)==2):
+            sitename = split[1]
+        else:
+            sitename = split[1]
+    except Exception:
+        sitename = split[1]
+        print("url error: " + url)
+    # start
     display = Display(visible=0, size=(800,600))
     display.start()
-    print('getURL')
     browser = webdriver.PhantomJS()
+    # get url
     browser.get(url)
     time.sleep(2)
-    print('Press CTRL+S')
-    ActionChains(browser).send_keys(Keys.CONTROL,'s').perform()
+    # press ctrl + s
+    ActionChains(browser).send_keys(Keys.COMMAND, 's').perform()
     time.sleep(3)
-    print('Press ENTER')
-    #ActionChains(browser).send_keys(Keys.ENTER).perform()
-    k = PyKeyboard()
-    k.press_key(k.enter_key)
-    k.release_key(k.enter_key)
-    print('Downloading...')
+    # press enter
+    pyautogui.typewrite(sitename+".html", interval=0.25)
+    pyautogui.keyDown('enter')
+    pyautogui.keyUp('enter')
     time.sleep(10) #waiting....enough time
-    print(browser.title)
+    # download
     browser.quit()
     display.stop()
 
-#scraper('http://www.naver.com')
+scraper('http://www.11st.co.kr')
