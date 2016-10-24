@@ -1,6 +1,7 @@
 import time
 from pyvirtualdisplay import Display
 from selenium import webdriver
+from selenium.webdriver import DesiredCapabilities
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 import pyautogui
@@ -18,23 +19,24 @@ def scraper(url):
     except Exception:
         sitename = split[1]
         print("url error: " + url)
-    # start
+    print("start")
     display = Display(visible=0, size=(800,600))
     display.start()
     browser = webdriver.PhantomJS()
-    # get url
+    print("get url")
     browser.get(url)
     time.sleep(2)
-    # press ctrl + s
+    browser.save_screenshot(sitename)
+    print("ctrl + s")
     ActionChains(browser).send_keys(Keys.COMMAND, 's').perform()
     time.sleep(3)
-    # press enter
+    print("enter")
     pyautogui.typewrite(sitename+".html", interval=0.25)
     pyautogui.keyDown('enter')
     pyautogui.keyUp('enter')
     time.sleep(10) #waiting....enough time
-    # download
+    print("download")
     browser.quit()
     display.stop()
 
-scraper('http://www.11st.co.kr')
+#scraper('http://www.11st.co.kr')

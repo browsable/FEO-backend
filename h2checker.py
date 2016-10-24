@@ -68,7 +68,7 @@ def checkH2S(domain):
         #response = 'HTTP/2 test not possible. Host not found or connection refused.'
     except socket.gaierror:
         # print(socket.gaierror)
-        return 5
+        return 2
         #response = 'HTTP/2 test not possible. Host not found or connection refused.'
     else:
         # check the selected protocol by the server
