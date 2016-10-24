@@ -16,7 +16,7 @@ def main():
         elif (h2checker.checkH2(url) == 2):
             return jsonify(url=url, notice='Failed to open URL')
         else:
-            #scraper.scrap(url)
+            scraper.scrap(url)
             return jsonify(url=url, notice='scraping')
 
 @app.route('/scraping')

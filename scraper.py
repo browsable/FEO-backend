@@ -1,11 +1,10 @@
 import time
 from pyvirtualdisplay import Display
 from selenium import webdriver
-from selenium.webdriver import DesiredCapabilities
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 import pyautogui
-from pykeyboard import PyKeyboard
+# 서버용 from pykeyboard import PyKeyboard
 
 def scraper(url):
     try:
@@ -22,15 +21,22 @@ def scraper(url):
     print("start")
     display = Display(visible=0, size=(800,600))
     display.start()
-    browser = webdriver.PhantomJS()
+    browser = webdriver.Firefox()
     print("get url")
     browser.get(url)
     time.sleep(2)
-    browser.save_screenshot(sitename)
     print("ctrl + s")
+    # 서버용
+    # ActionChains(browser).send_keys(Keys.CONTROL, 's').perform()
     ActionChains(browser).send_keys(Keys.COMMAND, 's').perform()
     time.sleep(3)
     print("enter")
+    # 서버용
+    # k = PyKeyboard()
+    # k.type_string(sitename, interval=0.25)
+    # k.press_key(k.enter_key)
+    # k.release_key(k.enter_key)
+    # 맥 로컬용
     pyautogui.typewrite(sitename+".html", interval=0.25)
     pyautogui.keyDown('enter')
     pyautogui.keyUp('enter')
@@ -38,5 +44,3 @@ def scraper(url):
     print("download")
     browser.quit()
     display.stop()
-
-#scraper('http://www.11st.co.kr')

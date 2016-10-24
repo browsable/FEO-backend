@@ -1,9 +1,12 @@
 import subprocess
-bashCommand = ['curl','--http2','-I','-L','-H','\'Accept: */*\'',
-               '-H','\'user-agent: h2-check/1.0.1\'',
-               '-H','\'Connection: Upgrade, HTTP2-Settings\'',
-               '-H','\'Upgrade: h2c\'','-H','\'HTTP2-Settings: <base64url encoding of HTTP/2 SETTINGS payload\'',
-               'google.com']
+# bashCommand = ['curl','--http2','-I','-L','-H','\'Accept: */*\'',
+#                '-H','\'user-agent: h2-check/1.0.1\'',
+#                '-H','\'Connection: Upgrade, HTTP2-Settings\'',
+#                '-H','\'Upgrade: h2c\'','-H','\'HTTP2-Settings: <base64url encoding of HTTP/2 SETTINGS payload\'',
+#                'google.com']
+
+bashCommand = ['curl','https://www.googleapis.com/pagespeedonline/v1/runPagespeed?url=http://code.google.com/speed/page-speed/&key=']
+
 process = subprocess.Popen(bashCommand, stdout=subprocess.PIPE)
 output, error = process.communicate()
 
