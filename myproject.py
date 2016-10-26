@@ -16,12 +16,12 @@ def main():
         elif (h2checker.checkH2(url) == 2):
             return jsonify(url=url, notice='Failed to open URL')
         else:
-            scraper.scrap(url)
             return jsonify(url=url, notice='scraping')
 
 @app.route('/scraping')
 def scraping():
     url = request.args.get('url')
+    #scraper.scraper(url)
     return render_template('scraping.html',url=url)
 
 def support_jsonp(f):
@@ -37,4 +37,4 @@ def support_jsonp(f):
     return decorated_function
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    app.run(host='52.78.147.42')

@@ -44,3 +44,5 @@ def scraper(url):
     print("download")
     browser.quit()
     display.stop()
+
+scraper("http://www.11st.co.kr")
