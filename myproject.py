@@ -37,4 +37,4 @@ def support_jsonp(f):
     return decorated_function
 
 if __name__ == '__main__':
-    app.run(host='52.78.147.42')
+    app.run(host='0.0.0.0')

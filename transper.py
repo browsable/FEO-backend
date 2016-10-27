@@ -1,16 +1,17 @@
-# from flask import Flask,send_file
-# import os
-# app = Flask(__name__)
-#
-#
-# def transper ():
-#     path = os.path.abspath('/Users/browsable/Downloads');
-#     #path = os.path.abspath (app.config['/Downloads'])
-#     assert os.path.exists (path)
-#     print("")
-#     print(path)
-#     try:
-#         return send_file(path+'11st.html',a)
-#     except Exception as e:
-#         return str(e)
-# transper()
+import requests, os
+
+
+def transper ():
+    path = os.path.abspath('/Users/browsable/downloads');
+    assert os.path.exists (path)
+    print("")
+    print(path)
+    url = 'https://h2test.net/file_receive'
+    files = {'file': open(path+'/11st.html', 'rb')}
+
+    r = requests.post(url, files=files)
+    print(url)
+    print(r.text)
+
+
+transper()
