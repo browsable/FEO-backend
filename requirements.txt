@@ -11,4 +11,3 @@ PyVirtualDisplay==0.2.1
 requests==2.11.1
 selenium==2.53.6
 six==1.10.0
-uWSGI==2.0.14
