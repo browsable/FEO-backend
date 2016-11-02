@@ -19,15 +19,10 @@ def scraper(url):
         sitename = split[1]
         print("url error: " + url)
 
-    profile = webdriver.FirefoxProfile()
-    profile.set_preference("browser.download.folderList", 2)
-    profile.set_preference("browser.download.manager.showWhenStarting", False)
-    profile.set_preference("browser.download.dir", '/templates/web')
-    profile.set_preference("browser.helperApps.neverAsk.saveToDisk", "application/x-gzip")
     print("start")
     display = Display(visible=0, size=(800,600))
     display.start()
-    browser = webdriver.Firefox(firefox_profile=profile)
+    browser = webdriver.Firefox()
     print("get url")
     browser.get(url)
     time.sleep(2)
@@ -39,7 +34,8 @@ def scraper(url):
     print("enter")
     # 서버용
     # k = PyKeyboard()
-    # k.type_string(sitename, interval=0.25)
+    # k.type_string(sitename, interval=0.25)ㅜㅁㅍㄷㄱㅗ싀
+
     # k.press_key(k.enter_key)
     # k.release_key(k.enter_key)
     # 맥 로컬용
@@ -51,4 +47,4 @@ def scraper(url):
     browser.quit()
     display.stop()
 
-scraper("https://www.11st.co.kr")
+scraper("http://www.naver.com")

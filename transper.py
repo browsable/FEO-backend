@@ -1,7 +1,7 @@
 import requests, os, zipfile
-
+import json
 def transper ():
-    sitename='11st'
+    sitename='naver'
     files_path = '/Users/browsable/Downloads/'+sitename+'_files'
     html_path = '/Users/browsable/Downloads/'+sitename+'.html'
     dest_file = 'web/'+sitename+'.zip'
@@ -9,7 +9,7 @@ def transper ():
     with zipfile.ZipFile(dest_file, 'w') as zf:
         rootpath = files_path
         for (path, dir, files) in os.walk(files_path):
-            for file in files:
+            for file in  files:
                 fullpath = os.path.join(path, file)
                 relpath = sitename+'_files/'+os.path.relpath(fullpath, rootpath)
                 zf.write(fullpath, relpath, zipfile.ZIP_DEFLATED)

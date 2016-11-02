@@ -6,7 +6,7 @@
 def curl(url):
     import subprocess, json
     url = url
-    bashCommand = ['curl','https://www.googleapis.com/pagespeedonline/v2/runPagespeed?url='+url+'&key=AIzaSyCY7d-XGfu3pYdksL0EELziWxYdZhJEeig']
+    bashCommand = ['curl','https://www.googleapis.com/pagespeedonline/v2/runPagespeed?url='+url+'&key=']
 
     process = subprocess.Popen(bashCommand, stdout=subprocess.PIPE)
     output, error = process.communicate()
