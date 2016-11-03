@@ -12,7 +12,7 @@ def scraper(url):
         if(len(split)==1):
             sitename = split[0]
         elif(len(split)==2):
-            sitename = split[1]
+            sitename = split[0]
         else:
             sitename = split[1]
     except Exception:
@@ -46,5 +46,3 @@ def scraper(url):
     print("download")
     browser.quit()
     display.stop()
-
-scraper("http://www.naver.com")

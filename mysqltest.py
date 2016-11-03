@@ -9,10 +9,23 @@ connection = pymysql.connect(host='localhost',
 
 
 try:
+    url = "www.naver.com"
+    try:
+        split = str(url).split('.')
+        if(len(split)==1):
+            sitename = split[0]
+        elif(len(split)==2):
+            sitename = split[1]
+        else:
+            sitename = split[1]
+    except Exception:
+        sitename = split[1]
+        print("url error: " + url)
+
     with connection.cursor() as cursor:
+        sql = "INSERT INTO url_list (sitename) VALUES ('"+sitename+"') ON DUPLICATE KEY UPDATE cnt=cnt+1"
+        cursor.execute(sql)
         # Create a new record
-        sql = "INSERT INTO `url_list` (`url`, `count`) VALUES (%s, %s)"
-        cursor.execute(sql, ('http://www.naver.com', 1))
 
     # connection is not autocommit by default. So you must commit to save
     # your changes.
@@ -20,7 +33,7 @@ try:
 
     with connection.cursor() as cursor:
         # Read a single record
-        sql = "SELECT `url`, `count` FROM `url_list`" #WHERE `num`=%s"
+        sql = "SELECT `fullurl`, `cnt` FROM `url_list`" #WHERE `num`=%s"
         #cursor.execute(sql, ('webmaster@python.org',))
         cursor.execute(sql)
         result = cursor.fetchone()
