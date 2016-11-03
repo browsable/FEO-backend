@@ -150,7 +150,6 @@ h6,
 	z-index: 9999;
 	overflow: hidden;
 }
-
 /*----------  PAGE-LOADER-1  ----------*/
 .page-loader-wrapper-1 { overflow: hidden; background-color: #000; }
 .page-loader-wrapper-1 .loader {
@@ -1006,7 +1005,7 @@ h6,
 .intro-section-1 .subscribe-form-1 { 
 	width: 600px; 
 	margin: auto; 
-	margin-bottom: 60px;
+	margin-bottom: 50px;
 }
 
 /*----------  INTRO-SECTION-2  ----------*/

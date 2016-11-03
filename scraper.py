@@ -1,4 +1,4 @@
-import time
+import time, namesplit
 from pyvirtualdisplay import Display
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
@@ -7,18 +7,7 @@ import pyautogui
 # 서버용 from pykeyboard import PyKeyboard
 
 def scraper(url):
-    try:
-        split = str(url).split('.')
-        if(len(split)==1):
-            sitename = split[0]
-        elif(len(split)==2):
-            sitename = split[0]
-        else:
-            sitename = split[1]
-    except Exception:
-        sitename = split[1]
-        print("url error: " + url)
-
+    sitename = namesplit.make(url)
     print("start")
     display = Display(visible=0, size=(800,600))
     display.start()

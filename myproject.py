@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify, current_app, redirect, url_for
-import h2checker, scraper
+import h2checker, scraper, namesplit
 from functools import wraps
 import pymysql.cursors
 
@@ -15,7 +15,6 @@ connection = pymysql.connect(host='localhost',
 @app.route('/')
 def main():
     url = request.args.get('url')
-
     if (url == None or ""):
         return render_template('index.html')
     else:
@@ -24,23 +23,12 @@ def main():
             return jsonify(url=url, notice='Failed to open URL')
         else:
             try:
-                try:
-                    split = str(url).split('.')
-                    print(split[0])
-                    if (len(split) == 1):
-                        sitename = split[0]
-                    elif (len(split) == 2):
-                        sitename = split[0]
-                    else:
-                        sitename = split[1]
-                except Exception:
-                    sitename = split[1]
-                    print("url error: " + url)
-                print(sitename)
+                sitename = namesplit.make(url)
+
                 with connection.cursor() as cursor:
                     sql = "INSERT INTO url_list (sitename) VALUES (%s) ON DUPLICATE KEY UPDATE cnt=cnt+1"
                     cursor.execute(sql,sitename)
-
+                print(sitename)
             finally:
                 connection.commit()
                 #connection.close()
