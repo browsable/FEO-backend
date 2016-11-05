@@ -104,73 +104,32 @@
 
                     <div class="navigation-wrp navigation-wrp-1">
                         <div class="inner-wrp" id="content">
-
                             <table id="tickets" class="table" frame="void">
                                 <tbody>
                                 <tr>
+                                    {% for item in url_list1 %}
                                     <td>
-                                        <a href="https://www.h2perf.com">
-                                            <h4 class="urltitle" id="urltitle0">h2perf.com</h4>
-                                            <img src="../static/images/h2perf.png">
+                                        <a href="{{item['fullurl']}}">
+                                            <h4 class="urltitle">{{item['sitename']}}</h4>
+                                            <img src="{{item['imgurl']}}" width="200px" height="135px">
                                         </a>
                                     </td>
-                                    <td>
-                                        <a href="https://www.h2perf.com">
-                                            <h4 class="urltitle" id="urltitle1">h2perf.com</h4>
-                                            <img src="../static/images/h2perf.png">
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="https://www.h2perf.com">
-                                            <h4 class="urltitle" id="urltitle2">h2perf.com</h4>
-                                            <img src="../static/images/h2perf.png">
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="https://www.h2perf.com">
-                                            <h4 class="urltitle" id="urltitle3">h2perf.com</h4>
-                                            <img src="../static/images/h2perf.png">
-                                        </a>
-                                    </td>
+                                    {% endfor %}
                                 </tr>
                                 <tr>
+                                    {% for item in url_list2 %}
                                     <td>
-                                        <a href="https://www.h2perf.com">
-                                            <h4 class="urltitle" id="urltitle4">h2perf.com</h4>
-                                            <img src="../static/images/h2perf.png">
+                                        <a href="{{item['fullurl']}}">
+                                            <h4 class="urltitle">{{item['sitename']}}</h4>
+                                            <img src="{{item['imgurl']}}" width="200px" height="135px">
                                         </a>
                                     </td>
-                                    <td>
-                                        <a href="https://www.h2perf.com">
-                                            <h4 class="urltitle" id="urltitle5">h2perf.com</h4>
-                                            <img src="../static/images/h2perf.png">
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="https://www.h2perf.com">
-                                            <h4 class="urltitle" id="urltitle6">h2perf.com</h4>
-                                            <img src="../static/images/h2perf.png">
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="https://www.h2perf.com">
-                                            <h4 class="urltitle" id="urltitle7">h2perf.com</h4>
-                                            <img src="../static/images/h2perf.png">
-                                        </a>
-                                    </td>
+                                    {% endfor %}
                                 </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
-
-                    <!-- NAVIGATION -->
-                    <!--<div class="navigation-wrp navigation-wrp-1">
-                        <div class="inner-wrp">
-                            <a href="#" data-page="left" class="nav-link hvr-sweep-to-left">Moreinfo</a>
-                            <a href="#" data-page="right" class="nav-link hvr-sweep-to-right">Contact Us</a>
-                        </div>
-                    </div>-->
 
                 </div>
             </div>
@@ -195,267 +154,6 @@
 
     </div><!-- / HOME-WRAPPER -->
 
-    <!-- PAGE LEFT -->
-    <div id="page-left" class="pages scroll-bar">
-        <div class="outer-wrp">
-
-            <!-- CLOSE -->
-            <div class="pg-close flex-cc">
-                <span class="ti-close"></span>
-            </div><!-- / CLOSE -->
-
-            <!-- ABOUT-SECTION -->
-            <div class="sections about-section about-section-1">
-                <div class="container">
-
-                    <!-- TITLE -->
-                    <div class="title-wrp">
-                        <h5 class="title mini">About</h5>
-                        <hr class="hr-1">
-                        <h1 class="title">Who we are</h1>
-                        <p class="sub-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc pretium
-                            aliquet consectetur. Donec ornare convallis arcu</p>
-                    </div><!-- / TITLE -->
-
-                    <!-- CONTENT -->
-                    <div class="content-wrp">
-                        <P>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean tempus leo et nisi
-                            vestibulum, eu tincidunt mi gravida. Donec dui neque, eleifend a sodales sed, scelerisque
-                            non dolor. Integer maximus auctor rutrum. Mauris dapibus placerat velit, ut suscipit lacus
-                            interdum nec. Morbi dui lectus, fermentum eget efficitur at, fringilla in ligula. Mauris
-                            faucibus risus vel sapien placerat euismod. Maecenas ac laoreet orci, rhoncus consectetur
-                            neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean tempus leo et nisi
-                            vestibulum, eu tincidunt mi gravida. Donec dui neque, eleifend a sodales sed, scelerisque
-                            non dolor. Integer maximus auctor rutrum. Mauris dapibus placerat velit, ut suscipit lacus
-                            interdum nec. Morbi dui lectus, fermentum eget efficitur at, fringilla in ligula. Mauris
-                            faucibus risus vel sapien placerat euismod. Maecenas ac laoreet orci, rhoncus consectetur
-                            neque.
-                        </P>
-                    </div><!-- / CONTENT -->
-
-                </div>
-            </div>
-            <!-- / ABOUT-SECTION -->
-
-            <!-- WORK-SECTION -->
-            <div class="sections work-section work-section-1">
-                <div class="container">
-
-                    <!-- TITLE -->
-                    <div class="title-wrp">
-                        <h5 class="title mini">Portfolio</h5>
-                        <hr class="hr-1">
-                        <h1 class="title">Our works</h1>
-                        <p class="sub-title">Pellentesque efficitur arcu et nibh efficitur viverra. Maecenas sit amet
-                            felis vel lorem sodales vehicula. Vestibulum vel molestie felis.</p>
-                    </div><!-- / TITLE -->
-
-                    <!-- CONTENT -->
-                    <div class="content-wrp row">
-
-                        <ul class="rw eq3 mb10 gt10 popgallery-widget">
-
-                            <li class="cl">
-                                <div class="portfolio-box portfolio-box1">
-                                    <div class="overlay">
-                                        <a href="../static/images/800x800_3.jpg" title="This is title of image"
-                                           class="pop-img"><i class="fa fa-search"></i></a>
-                                        <div class="caption">
-                                            <h3 class="hd">Consetetur sadipscing</h3>
-                                            <p class="txt">Lorem ipsum dolor sit amet</p>
-                                        </div>
-                                    </div><!-- /.overlay -->
-                                    <img src="../static/images/800x800_3.jpg" alt="image">
-                                </div><!-- /.portfolio-box -->
-                            </li><!-- /.cl -->
-
-                            <li class="cl">
-                                <div class="portfolio-box portfolio-box1">
-                                    <div class="overlay">
-                                        <a href="../static/images/800x800_4.jpg" title="This is title of image"
-                                           class="pop-img"><i class="fa fa-search"></i></a>
-                                        <div class="caption">
-                                            <h3 class="hd">Consetetur sadipscing</h3>
-                                            <p class="txt">Lorem ipsum dolor sit amet</p>
-                                        </div>
-                                    </div><!-- /.overlay -->
-                                    <img src="../static/images/800x800_4.jpg" alt="image">
-                                </div><!-- /.portfolio-box -->
-                            </li><!-- /.cl -->
-
-                            <li class="cl">
-                                <div class="portfolio-box portfolio-box1">
-                                    <div class="overlay">
-                                        <a href="../static/images/800x800_5.jpg" title="This is title of image"
-                                           class="pop-img"><i class="fa fa-search"></i></a>
-                                        <div class="caption">
-                                            <h3 class="hd">Consetetur sadipscing</h3>
-                                            <p class="txt">Lorem ipsum dolor sit amet</p>
-                                        </div>
-                                    </div><!-- /.overlay -->
-                                    <img src="../static/images/800x800_5.jpg" alt="image">
-                                </div><!-- /.portfolio-box -->
-                            </li><!-- /.cl -->
-
-                            <li class="cl">
-                                <div class="portfolio-box portfolio-box1">
-                                    <div class="overlay">
-                                        <a href="../static/images/800x800_6.jpg" title="This is title of image"
-                                           class="pop-img"><i class="fa fa-search"></i></a>
-                                        <div class="caption">
-                                            <h3 class="hd">Consetetur sadipscing</h3>
-                                            <p class="txt">Lorem ipsum dolor sit amet</p>
-                                        </div>
-                                    </div><!-- /.overlay -->
-                                    <img src="../static/images/800x800_6.jpg" alt="image">
-                                </div><!-- /.portfolio-box -->
-                            </li><!-- /.cl -->
-
-                            <li class="cl">
-                                <div class="portfolio-box portfolio-box1">
-                                    <div class="overlay">
-                                        <a href="../static/images/800x800_7.jpg" title="This is title of image"
-                                           class="pop-img"><i class="fa fa-search"></i></a>
-                                        <div class="caption">
-                                            <h3 class="hd">Consetetur sadipscing</h3>
-                                            <p class="txt">Lorem ipsum dolor sit amet</p>
-                                        </div>
-                                    </div><!-- /.overlay -->
-                                    <img src="../static/images/800x800_7.jpg" alt="image">
-                                </div><!-- /.portfolio-box -->
-                            </li><!-- /.cl -->
-
-                            <li class="cl">
-                                <div class="portfolio-box portfolio-box1">
-                                    <div class="overlay">
-                                        <a href="../static/images/800x800_8.jpg" title="This is title of image"
-                                           class="pop-img"><i class="fa fa-search"></i></a>
-                                        <div class="caption">
-                                            <h3 class="hd">Consetetur sadipscing</h3>
-                                            <p class="txt">Lorem ipsum dolor sit amet</p>
-                                        </div>
-                                    </div><!-- /.overlay -->
-                                    <img src="../static/images/800x800_8.jpg" alt="image">
-                                </div><!-- /.portfolio-box -->
-                            </li><!-- /.cl -->
-
-                        </ul>
-
-                    </div><!-- / CONTENT -->
-
-                </div>
-            </div>
-            <!-- / WORK-SECTION -->
-
-            <!-- SERVICES-SECTION -->
-            <div class="sections service-section service-section-1">
-                <div class="container">
-
-                    <!-- TITLE -->
-                    <div class="title-wrp">
-                        <h5 class="title mini">Services</h5>
-                        <hr class="hr-1">
-                        <h1 class="title">What we offer</h1>
-                        <p class="sub-title">Mauris eleifend aliquam mauris nec semper. Phasellus enim mauris, euismod
-                            quis arcu eu, convallis tincidunt dui.</p>
-                    </div><!-- / TITLE -->
-
-                    <!-- CONTENT -->
-                    <div class="content-wrp">
-                        <div class="row gt0">
-
-                            <!-- INFO-BOX -->
-                            <div class="col-md-4">
-                                <div class="info-box info-box-1">
-                                    <div class="img flex-cc"><span class="pe-7s-wallet"></span></div>
-                                    <div class="info">
-                                        <h2 class="hd">Values</h2>
-                                        <hr class="hr-1">
-                                        <p class="sub-txt">Lorem ipsum dolor sit ametconsetetur sadipscing elitr, sed
-                                            diam nonumy eirmod tempor invidunt ut labore et dolore magna</p>
-                                    </div>
-                                </div>
-                            </div><!-- / INFO-BOX -->
-
-                            <!-- INFO-BOX -->
-                            <div class="col-md-4">
-                                <div class="info-box info-box-1">
-                                    <div class="img flex-cc"><span class="pe-7s-like2"></span></div>
-                                    <div class="info">
-                                        <h2 class="hd">Strategy</h2>
-                                        <hr class="hr-1">
-                                        <p class="sub-txt">Lorem ipsum dolor sit ametconsetetur sadipscing elitr, sed
-                                            diam nonumy eirmod tempor invidunt ut labore et dolore magna</p>
-                                    </div>
-                                </div>
-                            </div><!-- / INFO-BOX -->
-
-                            <!-- INFO-BOX -->
-                            <div class="col-md-4">
-                                <div class="info-box info-box-1">
-                                    <div class="img flex-cc"><span class="pe-7s-monitor"></span></div>
-                                    <div class="info">
-                                        <h2 class="hd">Responsive</h2>
-                                        <hr class="hr-1">
-                                        <p class="sub-txt">Lorem ipsum dolor sit ametconsetetur sadipscing elitr, sed
-                                            diam nonumy eirmod tempor invidunt ut labore et dolore magna</p>
-                                    </div>
-                                </div>
-                            </div><!-- / INFO-BOX -->
-
-                        </div>
-
-                        <div class="row gt0">
-
-                            <!-- INFO-BOX -->
-                            <div class="col-md-4">
-                                <div class="info-box info-box-1">
-                                    <div class="img flex-cc"><span class="pe-7s-paint"></span></div>
-                                    <div class="info">
-                                        <h2 class="hd">Design</h2>
-                                        <hr class="hr-1">
-                                        <p class="sub-txt">Lorem ipsum dolor sit ametconsetetur sadipscing elitr, sed
-                                            diam nonumy eirmod tempor invidunt ut labore et dolore magna</p>
-                                    </div>
-                                </div>
-                            </div><!-- / INFO-BOX -->
-
-                            <!-- INFO-BOX -->
-                            <div class="col-md-4">
-                                <div class="info-box info-box-1">
-                                    <div class="img flex-cc"><span class="pe-7s-headphones"></span></div>
-                                    <div class="info">
-                                        <h2 class="hd">Support</h2>
-                                        <hr class="hr-1">
-                                        <p class="sub-txt">Lorem ipsum dolor sit ametconsetetur sadipscing elitr, sed
-                                            diam nonumy eirmod tempor invidunt ut labore et dolore magna</p>
-                                    </div>
-                                </div>
-                            </div><!-- / INFO-BOX -->
-
-                            <!-- INFO-BOX -->
-                            <div class="col-md-4">
-                                <div class="info-box info-box-1">
-                                    <div class="img flex-cc"><span class="pe-7s-smile"></span></div>
-                                    <div class="info">
-                                        <h2 class="hd">Updates</h2>
-                                        <hr class="hr-1">
-                                        <p class="sub-txt">Lorem ipsum dolor sit ametconsetetur sadipscing elitr, sed
-                                            diam nonumy eirmod tempor invidunt ut labore et dolore magna</p>
-                                    </div>
-                                </div>
-                            </div><!-- / INFO-BOX -->
-
-                        </div>
-                    </div><!-- / CONTENT -->
-
-                </div>
-            </div>
-            <!-- / SERVICES-SECTION -->
-
-        </div>
-    </div>
 
 </div><!-- / MAIN-WRAPPER -->
 

@@ -1,8 +1,3 @@
-# bashCommand = ['curl','--http2','-I','-L','-H','\'Accept: */*\'',
-#                '-H','\'user-agent: h2-check/1.0.1\'',
-#                '-H','\'Connection: Upgrade, HTTP2-Settings\'',
-#                '-H','\'Upgrade: h2c\'','-H','\'HTTP2-Settings: <base64url encoding of HTTP/2 SETTINGS payload\'',
-#                'google.com']
 def curl(url):
     import subprocess, json
     url = url

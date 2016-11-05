@@ -14,12 +14,23 @@ connection = pymysql.connect(host='localhost',
 
 @app.route('/')
 def main():
+    try:
+        with connection.cursor() as cursor:
+            sql = "SELECT * FROM feo.url_list ORDER BY cnt DESC LIMIT 0,4"
+            cursor.execute(sql)
+            url_list1 = cursor.fetchall()
+            sql = "SELECT * FROM feo.url_list ORDER BY cnt DESC LIMIT 4,4"
+            cursor.execute(sql)
+            url_list2 = cursor.fetchall()
+    finally:
+        connection.commit()
+
     url = request.args.get('url')
     if (url == None or ""):
-        return render_template('index.html')
+        return render_template('index.html', url_list1=url_list1, url_list2=url_list2)
     else:
         h2scheck = h2checker.checkH2S(url)
-        if(h2checker.checkH2(url) == 2):
+        if (h2checker.checkH2(url) == 2):
             return jsonify(url=url, notice='Failed to open URL')
         else:
             try:
@@ -27,16 +38,16 @@ def main():
 
                 with connection.cursor() as cursor:
                     sql = "INSERT INTO url_list (sitename) VALUES (%s) ON DUPLICATE KEY UPDATE cnt=cnt+1"
-                    cursor.execute(sql,sitename)
-                print(sitename)
+                    cursor.execute(sql, sitename)
             finally:
                 connection.commit()
-                #connection.close()
+                # connection.close()
 
             if (h2scheck == 3):
                 return jsonify(url=url, notice='This domain supports HTTP/2')
             else:
                 return jsonify(url=url, notice='scraping')
+
 
 @app.route('/scraping')
 def scraping():
