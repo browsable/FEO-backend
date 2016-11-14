@@ -1,24 +1,11 @@
-import sys
-import requests
 import socket
 import ssl
-
-# get the domain from console
-#domain = sys.argv[1]
-
-# make request headers to check h2c support
-headers = {'Accept': '*/*', \
-           'user-agent': 'h2-check/1.0.1', \
-           'Connection': 'Upgrade, HTTP2-Settings', \
-           'Upgrade': 'h2c', \
-           'HTTP2-Settings': '<base64url encoding of HTTP/2 SETTINGS payload>'}
-
-
+import redirecturl
 # http/2 check with h2c
 def checkH2(domain):
     # send GET request with the upgrade headers
     try:
-        r = requests.get('http://' + domain, headers=headers, allow_redirects=True)
+        r = redirecturl.getURL(domain);
     # except ConnectionError:
     except IOError:
         #response = "Failed to open URL"

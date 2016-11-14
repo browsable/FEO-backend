@@ -1,7 +1,6 @@
 import requests, os, zipfile
 import json
-def transper ():
-    sitename='naver'
+def transper (sitename):
     files_path = '/Users/browsable/Downloads/'+sitename+'_files'
     html_path = '/Users/browsable/Downloads/'+sitename+'.html'
     dest_file = 'web/'+sitename+'.zip'
@@ -17,8 +16,8 @@ def transper ():
         zf.write(html_path, sitename+'.html', zipfile.ZIP_DEFLATED)
         zf.close()
 
-    url = 'https://h2test.net/downloads'
+    h1test = 'https://h1test.net/downloads'
+    h2test = 'https://h2test.net/downloads'
     params = {'sitename': sitename}
-    requests.get(url, params=params)
-
-transper()
+    requests.get(h1test, params=params)
+    requests.get(h2test, params=params)

@@ -524,14 +524,14 @@ nc.scrollBar = function() {
 				var page = $(this).attr("data-page");
 				nc.animationOut("#home-wrapper");
 
-				setTimeout(function() { 
-					if(page == "left") {
-						$("#page-left").addClass("active-pg");
-					}
-					else {
-						$("#page-right").addClass("active-pg");	
-					}
-				}, 500);
+				// setTimeout(function() {
+				// 	if(page == "left") {
+				// 		$("#page-left").addClass("active-pg");
+				// 	}
+				// 	else {
+				// 		$("#page-right").addClass("active-pg");
+				// 	}
+				// }, 500);
 
 			});
 			$(".pages .pg-close").on("click", function(){

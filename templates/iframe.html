@@ -1,66 +1,73 @@
 <html>
 <head>
-	<title>HTTP/2 Performance</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<script>
-	$(document).ready(function(){
-		var scal = "scale(" + $('.frm').width()/$('.frame').width() + ")";
-	    $('.frame').css('-ms-transform', scal );
-	    $('.frame').css('-moz-transform', scal );
-	    $('.frame').css('-o-transform', scal );
-	    $('.frame').css('-webkit-transform', scal );
-	    $('.frame').css('transform', scal );
-	    $(window).resize(function() {
-	    	$('.row').css('width', $(window).width()+'px');
-	    	$('.row').css('height',$(window).height()+'px');
-	        var rescal = "scale(" + $('.frm').width()/$('.frame').width() + ")";
-		    $('.frame').css('-ms-transform', rescal );
-		    $('.frame').css('-moz-transform', rescal );
-		    $('.frame').css('-o-transform', rescal );
-		    $('.frame').css('-webkit-transform', rescal );
-		    $('.frame').css('transform', rescal );
-	    });
-    });
-    function loadDeferredIframe() {
-        var iframe = document.getElementById("my-deferred-iframe");
-        iframe.src = "./h2.html";
-    }
-	</script>
-	<style>
-		.frm {
-		    width: 50%;
-		    height: 100%;
-		    padding: 0;
-		    overflow: hidden;
-		    float:left;
-		    display: block;
-		}
-		.frame {
-		    width: 1280px;
-		    height: 1024px;
-		    /*-ms-transform: scale(0.25);
-		    -moz-transform: scale(0.25);
-		    -o-transform: scale(0.25);
-		    -webkit-transform: scale(0.25);
-		    transform: scale(0.25);*/
-		    
-		    -ms-transform-origin: 0 0;
-		    -moz-transform-origin: 0 0;
-		    -o-transform-origin: 0 0;
-		    -webkit-transform-origin: 0 0;
-		    transform-origin: 0 0;
-		}
-	</style>
+    <title>HTTP/2 Performance</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var scal = "scale(" + $('.frm').width() / $('.frame').width() + ")";
+            $('.frame').css('-ms-transform', scal);
+            $('.frame').css('-moz-transform', scal);
+            $('.frame').css('-o-transform', scal);
+            $('.frame').css('-webkit-transform', scal);
+            $('.frame').css('transform', scal);
+            $(window).resize(function () {
+                $('.row').css('width', $(window).width() + 'px');
+                $('.row').css('height', $(window).height() + 'px');
+                var rescal = "scale(" + $('.frm').width() / $('.frame').width() + ")";
+                $('.frame').css('-ms-transform', rescal);
+                $('.frame').css('-moz-transform', rescal);
+                $('.frame').css('-o-transform', rescal);
+                $('.frame').css('-webkit-transform', rescal);
+                $('.frame').css('transform', rescal);
+            });
+        });
+        function loadDeferredIframe() {
+            setTimeout(loadH2,1000)
+
+        }
+        function loadH2() {
+            var iframe = document.getElementById("my-deferred-iframe");
+            iframe.src = "./h2.html";
+        }
+    </script>
+    <style>
+        .frm {
+            width: 50%;
+            height: 100%;
+            padding: 0;
+            overflow: hidden;
+            float: left;
+            display: block;
+        }
+
+        .frame {
+            width: 1280px;
+            height: 1024px;
+            /*-ms-transform: scale(0.25);
+            -moz-transform: scale(0.25);
+            -o-transform: scale(0.25);
+            -webkit-transform: scale(0.25);
+            transform: scale(0.25);*/
+
+            -ms-transform-origin: 0 0;
+            -moz-transform-origin: 0 0;
+            -o-transform-origin: 0 0;
+            -webkit-transform-origin: 0 0;
+            transform-origin: 0 0;
+        }
+    </style>
 </head>
 <body>
-	<div class="row" style="width:100%;height:100%;">
-      <div class=frm>
-        <iframe class=frame src="h1.html" id="http11" marginheight="0" frameborder="0" scrolling="no" width="100%" height="100%" onload="loadDeferredIframe();"></iframe>
-      </div>
-      <div class=frm>
-        <iframe class=frame src="about:blank" id="my-deferred-iframe" marginheight="0" frameborder="0" scrolling="no" width="100%" height="100%"></iframe>
-      </div>
+<div class="row" style="width:100%;height:100%;">
+    <div class=frm>
+        <iframe class=frame src="h1.html" id="http11" marginheight="0" frameborder="0" scrolling="no" width="100%"
+                height="100%" onload="loadDeferredIframe();"></iframe>
     </div>
+    <div class=frm>
+        <iframe class=frame src="about:blank" id="my-deferred-iframe" marginheight="0" frameborder="0" scrolling="no"
+                width="100%" height="100%"></iframe>
+    </div>
+</div>
 
 </body>
 </html>
