@@ -52,19 +52,10 @@
 	<!-- TEMPLATE SCRIPT -->
 	<script src="../static/js/nc-common.js"></script>
 	<script>
-	// /*----------ON LOAD----------*/
-	// 	function clickbtn(){
-	// 		setTimeout(function() {
-	// 		var page = $(this).attr("data-page");
-	// 		nc.animationOut("#home-wrapper");
-	// 		$("#page-left").addClass("active-pg");
-	// 		}, 300);
-	// 	}
-	// /*----------/ON LOAD----------*/
-	/*----------prosessing----------*/
+	/*----------green -> white -> green----------*/
 		var speed=500
 		function flashit(){
-			var crosstable=document.getElementById? document.getElementById("transColor") : document.all? document.all.transColor : ""
+			var crosstable=document.getElementById? document.getElementById("icon3") : document.all? document.all.transColor : ""
 			if (crosstable){
 				if (crosstable.style.color.indexOf("green")!=-1)
 				crosstable.style.color="white"
@@ -73,28 +64,18 @@
 			}
 		}
 		setInterval("flashit()", speed)
-	/*----------/prosessing----------*/
-		// $("#transColor").click(function(){
-		//     $.ajax({
-		//     	url: "/page2.html",
-		//     	success : function () {
-		//     		$(("#transColor").css("color","red"));
-		//         }
-		//     });
-		// });
-
-
-		// $(document).ready(function(){
-		//     $("span").click(function(){
-		//         $("span").attr("id", "transColor");
-		//         flashit()
-		//     });
-		// });
-		$(document).ready(function(){
-		    $("#transColor").click(function(){
-		        $("#transColor").attr("id", "").css("color", "yellow");
-		    });
-		});
+	/*----------/green -> white -> green----------*/
+	/*----------SSE----------*/
+        $(document).ready(
+	        function() {
+	            sse = new EventSource('/my_event_source');
+	            sse.onmessage = function(message) {
+	                //console.log('A message has arrived!');
+	                $('#test').append('<a>'+message.data+'</a>');
+	                $("#"+message.data).attr("id", "").css("color", "yellow");
+	            }
+	        })
+	/*----------/SSE----------*/
 	</script>
 </head>
 <body>
@@ -110,21 +91,13 @@
 
 		<!-- BACKGROUND -->
 		<div class="bg-section bg-cover bg-cc" data-bgImage="../static/images/bg-19.jpg">
+			<!--<div class="overlay" style="background-color: rgba(0,0,0,0.35);"></div>-->
+			<!--<div class="bgslider" data-kenburnBgslider="../static/images/bg-19.jpg|../static/images/bg-14.jpg|../static/images/bg-16.jpg"></div>-->
 		</div><!-- / BACKGROUND -->
-
-		<!--&lt;!&ndash; HOME-WRAPPER &ndash;&gt;-->
-		<!--<div id="home-wrapper" class="flex-cc page-wrapper">-->
-			<!---->
-		<!--</div>&lt;!&ndash; / HOME-WRAPPER &ndash;&gt;-->
 
 		<!-- PAGE LEFT -->
 		<div id="page-left" class="pages scroll-bar">
 			<div class="outer-wrp">
-
-
-				<div class="pg-close flex-cc">
-					<span class="ti-close"></span>
-				</div>
 
 				<!-- ABOUT-SECTION -->
 				<div class="sections about-section about-section-2">
@@ -135,7 +108,7 @@
 							<h5 class="title mini">{{url}}</h5>
 							<!-- <hr class="hr-1"> -->
 							<hr>
-							<h1 class="title">REPORT</h1>
+							<h1 class="title">DIAGNOSIS</h1>
 						</div><!-- / TITLE -->
 
 						<!-- CONTENT -->
@@ -145,7 +118,7 @@
 								<!-- IMAGE -->
 								<div class="col-md-5 r-part">
 									<div class="image-wrapper animated s0-8 delay-0-2s" data-animOut="fadeOutUp" data-animIn="fadeInUp">
-										<img src="../static/images/{{pngName}}" alt="About us">
+										<img src="../static/{{imgurl}}" alt="About us">
 									</div>
 								</div><!-- / IMAGE -->
 
@@ -233,7 +206,7 @@
 						<!-- CONTENT -->
 						<div class="content-wrp row" style="text-align:center">
 
-							<ul class="rw eq3 mb10 gt10 popgallery-widget" style="height:200px">
+							<ul class="rw eq3 mb10 gt10 popgallery-widget" style="height:240px">
 
 								<li class="cl" style="height:105%; background-color:rgba(200,0,0,0.35);">
 									<h3 class="hd">Should Fix</h3>
@@ -245,7 +218,7 @@
 
 								<li class="cl" style="height:105%; background-color:rgba(100,60,0,0.35);">
 									<h3 class="hd">Consider fixing</h3>
-									<hr class="hr-1">P
+									<hr class="hr-1">
 									{% for i in orange: %}
 										<p class="txt">{{i}}</p>
 									{% endfor %}
@@ -309,11 +282,11 @@
 								<!-- INFO-BOX -->
 								<div class="col-md-4">
 									<div class="info-box info-box-1 odd">
-										<div class="img flex-cc"><span id="transColor" class="pe-7s-browser"></span></div>
+										<div class="img flex-cc"><span id="icon3" class="pe-7s-browser"></span></div>
 										<div class="info">
 											<h2 class="hd">Webpage scraping</h2>
 											<hr class="hr-1">
-											<p class="sub-txt">Scrap the website</p>
+											<p class="sub-txt" id='test'>Scrap the website</p>
 										</div>
 									</div>
 								</div><!-- / INFO-BOX -->
@@ -325,7 +298,7 @@
 								<!-- INFO-BOX -->
 								<div class="col-md-4">
 									<div class="info-box info-box-1 even">
-										<div class="img flex-cc"><span class="pe-7s-photo-gallery"></span></div>
+										<div class="img flex-cc"><span id='icon4' class="pe-7s-photo-gallery"></span></div>
 										<div class="info">
 											<h2 class="hd">HTTP/2 Demo</h2>
 											<hr class="hr-1">
@@ -337,7 +310,7 @@
 								<!-- INFO-BOX -->
 								<div class="col-md-4">
 									<div class="info-box info-box-1 odd">
-										<div class="img flex-cc"><span class="pe-7s-note2"></span></div>
+										<div class="img flex-cc"><span id='icon5' class="pe-7s-note2"></span></div>
 										<div class="info">
 											<h2 class="hd">Making a report</h2>
 											<hr class="hr-1">
@@ -349,7 +322,7 @@
 								<!-- INFO-BOX -->
 								<div class="col-md-4">
 									<div class="info-box info-box-1 even">
-										<div class="img flex-cc"><span class="pe-7s-display1"></span></div>
+										<div class="img flex-cc"><span id='icon6' class="pe-7s-display1"></span></div>
 										<div class="info">
 											<h2 class="hd">Completed</h2>
 											<hr class="hr-1">

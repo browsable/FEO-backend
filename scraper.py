@@ -7,7 +7,6 @@ import os
 # 서버용 from pykeyboard import PyKeyboard
 
 def scraper(url):
-    r = requests.get("")
     sitename = namesplit.make(url).replace(".", "")
     print(sitename)
     print("start")
@@ -40,4 +39,4 @@ def scraper(url):
             break
         time.sleep(1)
         print("1")
-    transper.transper(sitename)
+    #transper.transper(sitename)

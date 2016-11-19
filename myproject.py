@@ -1,15 +1,30 @@
-from flask import Flask, render_template, request, jsonify, current_app
+from flask import Flask, render_template, request, jsonify, current_app, Response
 import h2checker, scraper, namesplit, operator, pagespeed_api, snapshot,os,redirecturl
 from functools import wraps
 import pymysql.cursors
+# import gevent
+# import gevent.monkey
+# from gevent.pywsgi import WSGIServer
+# gevent.monkey.patch_all()
+# import executebash
 
 app = Flask(__name__)
-connection = pymysql.connect(host='52.78.203.106',
+
+connection = pymysql.connect(host='127.0.0.1',
                              user='root',
-                             password='soma1234',
+                             password='1234',
                              db='feo',
                              charset='utf8mb4',
                              cursorclass=pymysql.cursors.DictCursor)
+
+
+# def event_stream(i):
+#     yield 'data: icon%s\n\n' % i
+#
+# i = 2 #icon number (3~6)
+# @app.route('/my_event_source')
+# def sse_request():
+#     return Response(event_stream(i),mimetype='text/event-stream')
 
 @app.route('/')
 def main():
@@ -76,10 +91,6 @@ def scraping():
         else:
             red.append(key)
     return (render_template('page2.html', url=url, pagespeed=pagespeed[0], red=red, orange=orange, green=green, imgurl=imgurl))
-
-@app.route('scrapingend')
-def scrapingend():
-    return jsonify(url=url, notice='Failed to open URL')
 
 def support_jsonp(f):
     """Wraps JSONified output for JSONP"""
