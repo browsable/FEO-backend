@@ -51,32 +51,32 @@
 
 	<!-- TEMPLATE SCRIPT -->
 	<script src="../static/js/nc-common.js"></script>
-	<script>
-	/*----------green -> white -> green----------*/
-		var speed=500
-		function flashit(){
-			var crosstable=document.getElementById? document.getElementById("icon3") : document.all? document.all.transColor : ""
-			if (crosstable){
-				if (crosstable.style.color.indexOf("green")!=-1)
-				crosstable.style.color="white"
-					else
-				crosstable.style.color="green"
-			}
-		}
-		setInterval("flashit()", speed)
-	/*----------/green -> white -> green----------*/
-	/*----------SSE----------*/
-        $(document).ready(
-	        function() {
-	            sse = new EventSource('/my_event_source');
-	            sse.onmessage = function(message) {
-	                //console.log('A message has arrived!');
-	                $('#test').append('<a>'+message.data+'</a>');
-	                $("#"+message.data).attr("id", "").css("color", "yellow");
-	            }
-	        })
-	/*----------/SSE----------*/
-	</script>
+	<!--<script>-->
+	<!--/*&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;green -> white -> green&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;*/-->
+		<!--var speed=500-->
+		<!--function flashit(){-->
+			<!--var crosstable=document.getElementById? document.getElementById("icon3") : document.all? document.all.transColor : ""-->
+			<!--if (crosstable){-->
+				<!--if (crosstable.style.color.indexOf("green")!=-1)-->
+				<!--crosstable.style.color="white"-->
+					<!--else-->
+				<!--crosstable.style.color="green"-->
+			<!--}-->
+		<!--}-->
+		<!--setInterval("flashit()", speed)-->
+	<!--/*&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;/green -> white -> green&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;*/-->
+	<!--/*&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;SSE&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;*/-->
+        <!--$(document).ready(-->
+	        <!--function() {-->
+	            <!--sse = new EventSource('/my_event_source');-->
+	            <!--sse.onmessage = function(message) {-->
+	                <!--//console.log('A message has arrived!');-->
+	                <!--$('#test').append('<a>'+message.data+'</a>');-->
+	                <!--$("#"+message.data).attr("id", "").css("color", "yellow");-->
+	            <!--}-->
+	        <!--})-->
+	<!--/*&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;/SSE&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;*/-->
+	<!--</script>-->
 </head>
 <body>
 	<!-- PAGE-LOADER -->

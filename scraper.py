@@ -7,7 +7,7 @@ import os
 # 서버용 from pykeyboard import PyKeyboard
 
 def scraper(url):
-    sitename = namesplit.make(url).replace(".", "")
+    sitename = namesplit.make(url)
     print(sitename)
     print("start")
     # profile = webdriver.FirefoxProfile()
