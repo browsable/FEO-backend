@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request, jsonify, current_app, Response
+from flask import send_from_directory
+
 import h2checker, scraper, namesplit, operator, pagespeed_api, snapshot,os,redirecturl
 from functools import wraps
 import pymysql.cursors
@@ -8,7 +10,11 @@ import pymysql.cursors
 # gevent.monkey.patch_all()
 # import executebash
 
+UPLOAD_FOLDER = '/Users/browsable/PycharmProjects/FEO-backend/web'
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 connection = pymysql.connect(host='127.0.0.1',
                              user='root',
@@ -16,7 +22,6 @@ connection = pymysql.connect(host='127.0.0.1',
                              db='feo',
                              charset='utf8mb4',
                              cursorclass=pymysql.cursors.DictCursor)
-
 
 # def event_stream(i):
 #     yield 'data: icon%s\n\n' % i
@@ -33,7 +38,7 @@ def main():
             sql = "SELECT * FROM feo.url_list ORDER BY cnt DESC LIMIT 0,4"
             cursor.execute(sql)
             url_list1 = cursor.fetchall()
-            sql = "SELECT * FROM feo.url_list ORDER BY cnt DESC LIMIT 4,4"
+            sql = "SELECT * FROM feo.url_list ORDER BY cnt DESC LIMIT 5,4"
             cursor.execute(sql)
             url_list2 = cursor.fetchall()
     finally:
@@ -76,8 +81,10 @@ def main():
 def scraping():
     url = request.args.get('url')
     fullurl = redirecturl.getURL(url).url
-    scraper.scraper(fullurl)
-    imgurl = 'images/'+ namesplit.make(url) + ".png"
+    sitename = namesplit.make(url)
+    if not os.path.isfile("/Users/browsable/PycharmProjects/FEO-backend/web/" + sitename +'.zip'):
+        scraper.scraper(fullurl)
+    imgurl = 'images/'+ sitename + ".png"
     # make snapshot
     pagespeed = pagespeed_api.curl(fullurl)
     red, orange, green = [], [], []
@@ -91,6 +98,11 @@ def scraping():
         else:
             red.append(key)
     return (render_template('page2.html', url=url, pagespeed=pagespeed[0], red=red, orange=orange, green=green, imgurl=imgurl))
+
+@app.route('/web/<path:filename>', methods=['GET', 'POST'])
+def getzip(filename):
+    uploads = os.path.join(current_app.root_path, app.config['UPLOAD_FOLDER'])
+    return send_from_directory(directory=uploads, filename=filename)
 
 def support_jsonp(f):
     """Wraps JSONified output for JSONP"""

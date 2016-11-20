@@ -39,4 +39,4 @@ def scraper(url):
             break
         time.sleep(1)
         print("1")
-    #transper.transper(sitename)
+    transper.transper(sitename)
