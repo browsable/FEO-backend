@@ -446,15 +446,6 @@ nc.videoBg = function (obj, imglist) {
 
 	if( isMobile.any() ){
 		$(obj).css("display","none");
-		/*$(obj).vegas({
-			slides: [
-				{ src: "images/bg-1.jpg" },
-				{ src: "images/bg-2.jpg" },
-				{ src: "images/bg-3.jpg" },
-				{ src: "images/bg-4.jpg" }
-			]
-			slides: imglist
-		});*/
 	}
 	else{
 		$(obj).css("display","block");

@@ -1,14 +1,12 @@
 from flask import Flask, render_template, request, jsonify, current_app, Response
 from flask import send_from_directory
-
+import extract_site
 import h2checker, scraper, namesplit, operator, pagespeed_api, snapshot,os,redirecturl
 from functools import wraps
 import pymysql.cursors
 # import gevent
 # import gevent.monkey
-# from gevent.pywsgi import WSGIServer
 # gevent.monkey.patch_all()
-# import executebash
 
 UPLOAD_FOLDER = '/Users/browsable/PycharmProjects/FEO-backend/web'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
@@ -22,14 +20,23 @@ connection = pymysql.connect(host='127.0.0.1',
                              db='feo',
                              charset='utf8mb4',
                              cursorclass=pymysql.cursors.DictCursor)
+def event_stream(url):
+    sitename=namesplit.make(url)
+    fullurl = redirecturl.getURL(url).url
+    if not os.path.isfile("/Users/browsable/PycharmProjects/FEO-backend/web/" + sitename +'.zip'):
+        scraper.scraper(fullurl)
+    yield 'data: icon%s\n\n' % 3
+    #page3
+    import time
+    time.sleep(5)
+    yield 'data: icon%s\n\n' % 5
 
-# def event_stream(i):
-#     yield 'data: icon%s\n\n' % i
-#
-# i = 2 #icon number (3~6)
-# @app.route('/my_event_source')
-# def sse_request():
-#     return Response(event_stream(i),mimetype='text/event-stream')
+    yield 'data: last-item\n\n'
+
+@app.route('/my_event_source/<path:url>')
+def sse_request(url):
+
+    return Response(event_stream(url),mimetype='text/event-stream')
 
 @app.route('/')
 def main():
@@ -82,8 +89,8 @@ def scraping():
     url = request.args.get('url')
     fullurl = redirecturl.getURL(url).url
     sitename = namesplit.make(url)
-    if not os.path.isfile("/Users/browsable/PycharmProjects/FEO-backend/web/" + sitename +'.zip'):
-        scraper.scraper(fullurl)
+    # if not os.path.isfile("/Users/browsable/PycharmProjects/FEO-backend/web/" + sitename +'.zip'):
+    #     scraper.scraper(fullurl)
     imgurl = 'images/'+ sitename + ".png"
     # make snapshot
     pagespeed = pagespeed_api.curl(fullurl)
@@ -97,12 +104,28 @@ def scraping():
             orange.append(key)
         else:
             red.append(key)
-    return (render_template('page2.html', url=url, pagespeed=pagespeed[0], red=red, orange=orange, green=green, imgurl=imgurl))
+    return (render_template('page2.html', url=url,sitename=sitename,pagespeed=pagespeed[0], red=red, orange=orange, green=green, imgurl=imgurl))
+
+@app.route('/iframe/<path:sitename>', methods=['GET', 'POST'])
+def iframe(sitename):
+    return render_template('iframe.html', sitename=sitename)
 
 @app.route('/web/<path:filename>', methods=['GET', 'POST'])
 def getzip(filename):
     uploads = os.path.join(current_app.root_path, app.config['UPLOAD_FOLDER'])
     return send_from_directory(directory=uploads, filename=filename)
+
+@app.route('/result/<path:sitename>', methods=['GET', 'POST'])
+def result(sitename):
+    if not os.path.exists("/Users/browsable/PycharmProjects/FEO-backend/static/wpt/" + sitename):
+        h1url = 'https://www.h1test.net/web/'+sitename+'/'+sitename+'.html'
+        h2url = 'https://www.h2test.net/web/'+sitename+'/'+sitename+'.html'
+        originurl = redirecturl.getURL(sitename).url
+        data_set = extract_site.get_data_comparison_site(sitename,h1url,h2url,originurl)
+    else:
+        data_set = extract_site.get_data_comparison_site_reload(sitename)
+
+    return render_template("page3.html",sitename=sitename, data_set=data_set)
 
 def support_jsonp(f):
     """Wraps JSONified output for JSONP"""

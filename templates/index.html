@@ -8,6 +8,7 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="">
@@ -109,7 +110,7 @@
                                 <tr>
                                     {% for item in url_list1 %}
                                     <td>
-                                        <a href="{{item['fullurl']}}">
+                                        <a href="{{ url_for('result',sitename=item['sitename']) }}">
                                             <h4 class="urltitle">{{item['sitename']}}</h4>
                                             <img src="{{ url_for('static', filename =item['imgurl']) }}" width="200px" height="130px" onerror="this.src='../static/images/empty.png'">
                                         </a>
@@ -119,7 +120,7 @@
                                 <tr>
                                     {% for item in url_list2 %}
                                     <td>
-                                        <a href="{{item['sitename']}}">
+                                        <a href="{{ url_for('result',sitename=item['sitename']) }}">
                                             <h4 class="urltitle">{{item['sitename']}}</h4>
                                             <img src="{{ url_for('static', filename =item['imgurl']) }}" width="200px" height="130px" onerror="this.src='../static/images/empty.png'">
                                         </a>
@@ -169,6 +170,10 @@
 
 <!-- TEMPLATE SCRIPT -->
 <script src="../static/js/nc-common.js"></script>
+<script type=text/javascript>
+  $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+</script>
+
 <!-- CUSTOM SCRIPT -->
 <script src="../static/js/jsonp.js"></script>
 

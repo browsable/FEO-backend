@@ -3,16 +3,18 @@ import json
 import urllib
 import operator
 
-def extract_data(hash_url):
+def extract_data(dirpath):
     # Get json file
-    arg_hash_url = hash_url
-    url = "/home/refgjin/Downloads/reporter/static/wpt/"+arg_hash_url+"/data.json"
+    url = "/Users/browsable/PycharmProjects/FEO-backend/static/wpt/"+dirpath+"data.json"
+
     with open(url) as d_json:
         json_data = json.load(d_json)
 
     #print(json_data) # probe test
     # Wrapping data into list for display through D3.js graphic renderer
     load_time=json_data['data']['runs']['1']['firstView']['loadTime']/1000
+    load_time2 = json_data['data']['runs']['1']['repeatView']['loadTime'] / 1000
+    load_time_ls = [load_time,load_time2]
     req_cnt=json_data['data']['runs']['1']['firstView']['requestsFull']
     gzip_cnt=json_data['data']['runs']['1']['firstView']['score_gzip']
     html_siz = json_data['data']['runs']['1']['firstView']['breakdown']['html']['bytes']
@@ -117,84 +119,52 @@ def extract_data(hash_url):
         domain_ls.append(tmp_ls)
         w_cnt = w_cnt + 1
 
+    return [load_time_ls, req_cnt,gzip_cnt, priority, cdn_list, domain_ls, html_siz, js_siz, css_siz, img_siz, fls_siz, font_siz, ot_siz, total_rcs_siz]
 
 
-    """ # probe test
-    load_time=str(load_time)    # Convert to string
-    req_cnt=str(req_cnt)
-    gzip_cnt=str(gzip_cnt)
-    print("====================")
-    print("WPT ID : "+json_data['data']['id'])
-    print("Origin URL : " + json_data['data']['url'])
-    print("Tester DNS : "+json_data['data']['testerDNS'])
-    print('')
 
-    print("Gzip count : "+gzip_cnt)
-    print("Load time : "+load_time+"s")
-    print("Request times : "+req_cnt)
-    print("--- Resource size ---")
-    print("html : "+measuring(html_siz)+" bytes, javascript : "+measuring(js_siz)+" bytes, css : "+measuring(css_siz)+" bytes, img : "+measuring(img_siz)+" bytes,")
-    print(" flash : "+measuring(fls_siz)+" bytes, font : "+measuring(font_siz)+" bytes, other : "+measuring(ot_siz)+" bytes")
-    print("TOTAL : "+measuring(total_rcs_siz)+" bytes")
-    print("====================")
-    print()
-
-    print("CDN_PROVIDER. ")
-
-    print(cdn_list)
-    """
-    #for key, value in sorted(domain_dic.items(), key=operator.itemgetter(1), reverse=True):
-    #    print(" " + key + " : " + str(value))
-        #dom_data[2] = ["www.domain3.xyz", 10, 5];
-        #dom_data[3] = ["total", 100, 45];
-    #print()
-    #print("PRIORITYs,")
-    #print(priority)
-
-    return [load_time, req_cnt,gzip_cnt, priority, cdn_list, domain_ls, html_siz, js_siz, css_siz, img_siz, fls_siz, font_siz, ot_siz, total_rcs_siz]
-
-
-def get_data_comparison_site(h1url, h2url, originurl):
+def get_data_comparison_site(sitename, h1url, h2url, originurl):
     """ save key limits
     # Reqeust to wpt server ( Generate hash_url & Result )
     h1x_hash = generate_hash("www.facebook.com")
     h2_hash = generate_hash("www.kyobobook.co.kr")
     origin_hash = generate_hash("www.11st.co.kr")
     """
-    h1x_hash = "161110_FH_24XP" # static value for test
-    h2_hash = "161110_1M_24XX"
-    origin_hash = "161110_G6_24XY"
+    h1x_hash = generate_hash(h1url)
+    h2_hash = generate_hash(h2url)
+    origin_hash = generate_hash(originurl)
+
+    # h1x_hash = "161110_FH_24XP" # static value for test
+    # h2_hash = "161110_1M_24XX"
+    # origin_hash = "161110_G6_24XY"
 
     # Extract data, from h1.1, h2 & origin url to each list ( static is test value )
-    #generate_resource.make_json(h1x_hash)
-    h1x_list = extract_data(h1x_hash)
+    generate_resource.make_json(sitename+"/h1/",h1x_hash)
+    h1x_list = extract_data(sitename+"/h1/")
 
-    #generate_resource.make_json(h2_hash)
-    h2_list = extract_data(h2_hash)
+    generate_resource.make_json(sitename+"/h2/",h2_hash)
+    h2_list = extract_data(sitename+"/h2/")
 
-    #generate_resource.make_json(origin_hash)
-    origin_list = extract_data(origin_hash)
+    generate_resource.make_json(sitename+"/orgin/",origin_hash)
+    origin_list = extract_data(sitename+"/orgin/")
 
 
     # Generate comparison data
-    return generate_data(h1x_hash,h2_hash,h1x_list,h2_list,origin_list)
+    return generate_data(h1x_list,h2_list,origin_list)
 
+def get_data_comparison_site_reload(sitename):
+    h1x_list = extract_data(sitename+"/h1/")
+    h2_list = extract_data(sitename+"/h2/")
+    origin_list = extract_data(sitename+"/orgin/")
+    return generate_data(h1x_list, h2_list, origin_list)
 
-def generate_data(h1x_hash,h2_hash,h1x_list,h2_list,origin_list):
-    arg_h1x_hash=h1x_hash
-    arg_h2_hash=h2_hash
+def generate_data(h1x_list,h2_list,origin_list):
     arg_h1x_list = h1x_list
     arg_h2_list = h2_list
     arg_origin_list = origin_list
-    #[load_time, req_cnt, gzip_cnt, priority, cdn_dict, don, html_siz, js_siz, css_siz, img_siz, fls_siz, font_siz, ot_siz, total_rcs_siz]
-    #      0        1        2         3          4       5      6       7       8           9       10      11        12        13
-
-    gen_h1x=[arg_h1x_hash,arg_h1x_list[0]] # hash, load_time
-    gen_h2=[arg_h2_hash,arg_h2_list[0]] # hash, load_time
+    gen_h1x=["",arg_h1x_list[0][0],arg_h1x_list[0][1],arg_h1x_list[6],arg_h1x_list[7],arg_h1x_list[8],arg_h1x_list[9],arg_h1x_list[10],arg_h1x_list[11],arg_h1x_list[12],measuring(arg_h1x_list[13])] # hash, load_time
+    gen_h2=["",arg_h2_list[0][0],arg_h2_list[0][1],arg_h2_list[6],arg_h2_list[7],arg_h2_list[8],arg_h2_list[9],arg_h2_list[10],arg_h2_list[11],arg_h2_list[12],measuring(arg_h2_list[13])] # hash, load_time
     gen_org=[arg_origin_list[3],arg_origin_list[4],arg_origin_list[5]] # priority, cdn, domain
-
-    res=[]
-    #res=[arg_h1x_list[1],arg_h2_list[1],arg_h1x_list[2],arg_h2_list[2],arg_h1x_list[3],arg_h2_list[3],arg_h1x_list[4],arg_h2_list[4],arg_h1x_list[5],arg_h2_list[5],arg_h1x_list[6],arg_h2_list[6],arg_h1x_list[7],arg_h2_list[7],arg_h1x_list[8],arg_h2_list[8],arg_h1x_list[9],arg_h2_list[9],arg_h1x_list[10],arg_h2_list[10],arg_h1x_list[11],arg_h2_list[11]]
 
     return [gen_h1x,gen_h2,gen_org]
 
@@ -205,7 +175,6 @@ def generate_hash(url):
     resp_url = resp.geturl()  # redirect
     hash_url = resp_url.replace("http://www.webpagetest.org/result/", "")
     hash_url = hash_url.replace("/", "")
-    #print(hash_url + ", " + url)  # probe test
     return hash_url
 
 # Convert format, 10000000 to 1,000,000

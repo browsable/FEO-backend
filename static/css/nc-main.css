@@ -110,8 +110,8 @@ h6,
 .title-wrp .title { text-transform: uppercase; font-weight: 700; }
 .title-wrp .title.mini { 
 	font-size: 22px;
-	font-weight: 600; 
-	letter-spacing: 4px; 
+	font-weight: 600;
+	letter-spacing: 4px;
 }
 .title-wrp .sub-title {
 	font-weight: 100;
@@ -158,9 +158,9 @@ h6,
 	position: relative;
 	z-index: 999;
 }
-.stick1, 
-.stick2, 
-.stick3, 
+.stick1,
+.stick2,
+.stick3,
 .stick4 {
 	background-color: #fff;
 	width: 50px;
@@ -193,19 +193,19 @@ h6,
 }
 
 @keyframes sk-cubemove {
-	25% { 
+	25% {
 		transform: translateX(42px) rotate(-90deg) scale(0.9);
 		-webkit-transform: translateX(42px) rotate(-90deg) scale(0.9);
-	} 50% { 
+	} 50% {
 		transform: translateX(42px) translateY(42px) rotate(-179deg);
 		-webkit-transform: translateX(42px) translateY(42px) rotate(-179deg);
-	} 50.1% { 
+	} 50.1% {
 		transform: translateX(42px) translateY(42px) rotate(-180deg);
 		-webkit-transform: translateX(42px) translateY(42px) rotate(-180deg);
-	} 75% { 
+	} 75% {
 		transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.9);
 		-webkit-transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.9);
-	} 100% { 
+	} 100% {
 		transform: rotate(-360deg);
 		-webkit-transform: rotate(-360deg);
 	}
@@ -345,7 +345,7 @@ h6,
 	height: 50px;
 	position: relative;
 }
-.page-loader-wrapper-3 .circle1, 
+.page-loader-wrapper-3 .circle1,
 .page-loader-wrapper-3 .circle2{
 	width: 100%;
 	height: 100%;
@@ -369,10 +369,10 @@ h6,
 	50% { -webkit-transform: scale(1.0) }
 }
 @keyframes bounce {
-	0%, 100% { 
+	0%, 100% {
 		transform: scale(0.0);
 		-webkit-transform: scale(0.0);
-	} 50% { 
+	} 50% {
 		transform: scale(1.0);
 		-webkit-transform: scale(1.0);
 	}
@@ -414,15 +414,15 @@ h6,
 	text-transform: uppercase;
 	box-shadow: none;
 }
-.btn.active.focus, 
-.btn.active:focus, 
-.btn.focus, 
-.btn:active.focus, 
-.btn:active:focus, 
-.btn:focus { 
-	outline: 0; 
+.btn.active.focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn:active:focus,
+.btn:focus {
+	outline: 0;
 }
-.btn.active, 
+.btn.active,
 .btn:active {
 	box-shadow: none;
 }
@@ -501,7 +501,7 @@ h6,
 	left: 8px;
 	opacity: 1;
 }
-#ss_menu > .menu .share .circle:after, 
+#ss_menu > .menu .share .circle:after,
 #ss_menu > .menu .share .circle:before {
 	-webkit-transition: all 1s ease;
 	-moz-transition: all 1s ease;
@@ -730,13 +730,13 @@ h6,
 	-webkit-transition-timing-function: ease-out;
 	transition-timing-function: ease-out;
 }
-.hvr-sweep-to-right:hover, 
-.hvr-sweep-to-right:focus, 
+.hvr-sweep-to-right:hover,
+.hvr-sweep-to-right:focus,
 .hvr-sweep-to-right:active {
 	color: #000;
 }
-.hvr-sweep-to-right:hover:before, 
-.hvr-sweep-to-right:focus:before, 
+.hvr-sweep-to-right:hover:before,
+.hvr-sweep-to-right:focus:before,
 .hvr-sweep-to-right:active:before {
 	-webkit-transform: scaleX(1);
 	transform: scaleX(1);
@@ -775,13 +775,13 @@ h6,
 	-webkit-transition-timing-function: ease-out;
 	transition-timing-function: ease-out;
 }
-.hvr-sweep-to-left:hover, 
-.hvr-sweep-to-left:focus, 
+.hvr-sweep-to-left:hover,
+.hvr-sweep-to-left:focus,
 .hvr-sweep-to-left:active {
 	color: #000;
 }
-.hvr-sweep-to-left:hover:before, 
-.hvr-sweep-to-left:focus:before, 
+.hvr-sweep-to-left:hover:before,
+.hvr-sweep-to-left:focus:before,
 .hvr-sweep-to-left:active:before {
 	-webkit-transform: scaleX(1);
 	transform: scaleX(1);
@@ -907,9 +907,9 @@ h6,
 }
 .popup-block-1 .title-wrp .title.mini { font-size: 16px; }
 .popup-block-1 .title-wrp .hr-1 { border-color: rgba(0,0,0,0.15); }
-.popup-block-1 .title-wrp .sub-title { 
-	font-size: 18px; 
-	width: 90%; 
+.popup-block-1 .title-wrp .sub-title {
+	font-size: 18px;
+	width: 90%;
 	color: #000;
 }
 .popup-block-1 .clock.clock-1 .countdown-widget .inner-dashboard { border-color: rgba(0,0,0,0.2); background-color: rgba(0,0,0,0.05); }
@@ -917,7 +917,7 @@ h6,
 .popup-block-1 .countdown-widget .inner-dash,
 .popup-block-1 .clock.clock-1 .countdown-widget .dash_title {
 	color: #000;
-} 
+}
 .mfp-close-btn-in .mfp-close { color: #000; }
 
 @-webkit-keyframes fadeInUp {
@@ -1002,9 +1002,9 @@ h6,
 	font-weight: 100;
 	text-transform: uppercase;
 }
-.intro-section-1 .subscribe-form-1 { 
-	width: 600px; 
-	margin: auto; 
+.intro-section-1 .subscribe-form-1 {
+	width: 600px;
+	margin: auto;
 	margin-bottom: 50px;
 }
 

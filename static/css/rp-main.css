@@ -83,7 +83,8 @@ body,
 .info-box-1 .sub-txt .rp-sub-txt .rp-main-txt,
 .rp-content-wrp .rp-ctitle .rp-ctitle50 .rp-content-title .rp-content-subtitle,
 .rp-comparison,
-.rp-toolTip
+.rp-toolTip,
+.rp-banner
 {
 	font-family: 'Open Sans', sans-serif;
 }
@@ -121,8 +122,10 @@ h6,
 .title-thumbnail .rp-img {
 	max-width:300px;
 }
-.title-wrp { 
-	float: left;
+.title-wrp {
+	display:block;
+	float:center;
+	margin:auto;
 	width: 60%;
 	text-align: center; 
 	margin-top: 60px;
@@ -167,6 +170,7 @@ h6,
 .rp-content-wrp .rp-ctitle50{
 	width:45%;
 	float:left;
+	color:#ffffff;
 	margin:10px 40px 50px 0px;
 }
 .rp-content-wrp .rp-ctitle {
@@ -201,7 +205,7 @@ h6,
 .rp-content-wrp .rp-content-txt {
 	text-align:center;
 	font-weight: 100;
-	font-size: 15px;
+	font-size: 20px;
 	color:  rgba(255,255,255,0.6);;
 	width: 95%;
 	margin: auto;
@@ -214,13 +218,14 @@ h6,
 	color: black;
 	width: 90%;
 	margin: auto;
-	margin-top: 10px;
+	margin-top: 20px;
 }
 .rp-content-wrp .wpt-screenshot {
 	display:block;
 	margin:auto;
 	margin-top:20px;
 	width:100%;
+	height: 280px;
 	max-width:300px;
 }
 .rp-content-wrapper {
@@ -270,6 +275,14 @@ h6,
     padding: 5px;
     text-align: center;
 }
+.rp-banner p{
+	font-size:15px;
+	font-weight:700;
+	color:rgba(255,255,255,0.6);
+}
+.rp-banner p:hover{
+	color:rgba(255,255,255,1);
+}
 svg {
     width: 100%;
     height: 100%;
@@ -297,7 +310,7 @@ text.value {
     fill: steelblue;
     fill-opacity: .9;
 }
-rp-d3-loadtime{
+.rp-d3-loadtime{
 	width:960px;
 	height:500px;
 	position:relative;

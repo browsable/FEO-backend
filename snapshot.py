@@ -1,6 +1,6 @@
 def urlpageshot(url, name):
     from selenium import webdriver
-    shot = webdriver.Firefox();
+    shot = webdriver.Firefox()
     shot.set_window_size(1920,1080)
     shot.get(url)
     imgurl = 'static/images/'+name

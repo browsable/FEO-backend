@@ -9,19 +9,19 @@ import os
 import requests
 import re
 
-def make_json(hash_url):
+def make_json(dirpath, hash_url):
     # Generate result for request & Extract hash_url
     arg_hash_url = hash_url
 
     # Make a directory
-    if not os.path.exists("/home/refgjin/Downloads/wpt/"+arg_hash_url):
-        os.makedirs("/home/refgjin/Downloads/wpt/"+arg_hash_url)
+    if not os.path.exists("/Users/browsable/PycharmProjects/FEO-backend/static/wpt/"+dirpath):
+        os.makedirs("/Users/browsable/PycharmProjects/FEO-backend/static/wpt/"+dirpath)
 
     # Check finishing test
     finishCheck(arg_hash_url)
 
     # Make waterfall.png / connection.png / screenshot.png
-    make_img_file(arg_hash_url)
+    make_img_file(dirpath, arg_hash_url)
 
     # Get a json data from wpt & Store json data
     """"
@@ -35,10 +35,8 @@ def make_json(hash_url):
     url_resp = json.dumps(url_resp.text)
     urls_json = json.loads(url_resp)
 
-    file_path = "/home/refgjin/Downloads/reporter/static/wpt/"+arg_hash_url+"/data.json"
-    if not os.path.exists(os.path.dirname(file_path)):
-        os.mkdirs(os.path.dirname(file_path))
-    with open(file_path, "a") as my_file:
+    file_path = "/Users/browsable/PycharmProjects/FEO-backend/static/wpt/"+dirpath+"data.json"
+    with open(file_path, "w") as my_file:
         my_file.write(urls_json)
 
 def finishCheck(hash_url):
@@ -62,18 +60,18 @@ def wpt_checker(url):
     res = json.loads(res)
     return res
 
-def make_img_file(hash_url):
+def make_img_file(dirpath, hash_url):
     arg_hash_url=hash_url
 
-    with open("/home/refgjin/Downloads/reporter/static/wpt/" + arg_hash_url + "/waterfall.png", "wb") as waterfall_file:
+    with open("/Users/browsable/PycharmProjects/FEO-backend/static/wpt/"+dirpath+"waterfall.png", "wb") as waterfall_file:
         wf_response = requests.get("http://www.webpagetest.org/result/" + arg_hash_url + "/1_waterfall_thumb.png")
         waterfall_file.write(wf_response.content)
 
-    with open("/home/refgjin/Downloads/reporter/static/wpt/" + arg_hash_url + "/screenshot.jpg", "wb") as screen_file:
+    with open("/Users/browsable/PycharmProjects/FEO-backend/static/wpt/"+dirpath+"screenshot.jpg", "wb") as screen_file:
         sc_response = requests.get("http://www.webpagetest.org/results/" + convert_hash(arg_hash_url) + "/1_screen.jpg")
         screen_file.write(sc_response.content)
 
-    with open("/home/refgjin/Downloads/reporter/static/wpt/" + arg_hash_url + "/connection.png", "wb") as connection_file:
+    with open("/Users/browsable/PycharmProjects/FEO-backend/static/wpt/"+dirpath+"connection.png", "wb") as connection_file:
         cn_response = requests.get("http://www.webpagetest.org/waterfall.png?test=" + arg_hash_url +
                                 "&run=1&width=930&type=connection&mime=1")
         connection_file.write(cn_response.content)
