@@ -121,38 +121,15 @@ def extract_data(dirpath):
 
     return [load_time_ls, req_cnt,gzip_cnt, priority, cdn_list, domain_ls, html_siz, js_siz, css_siz, img_siz, fls_siz, font_siz, ot_siz, total_rcs_siz]
 
-
-
-def get_data_comparison_site(sitename, h1url, h2url, originurl):
-    """ save key limits
-    # Reqeust to wpt server ( Generate hash_url & Result )
-    h1x_hash = generate_hash("www.facebook.com")
-    h2_hash = generate_hash("www.kyobobook.co.kr")
-    origin_hash = generate_hash("www.11st.co.kr")
-    """
+def generate_resouce_site(sitename, h1url, h2url, originurl):
     h1x_hash = generate_hash(h1url)
     h2_hash = generate_hash(h2url)
     origin_hash = generate_hash(originurl)
+    generate_resource.make_json(sitename + "/h1/", h1x_hash)
+    generate_resource.make_json(sitename + "/h2/", h2_hash)
+    generate_resource.make_json(sitename + "/orgin/", origin_hash)
 
-    # h1x_hash = "161110_FH_24XP" # static value for test
-    # h2_hash = "161110_1M_24XX"
-    # origin_hash = "161110_G6_24XY"
-
-    # Extract data, from h1.1, h2 & origin url to each list ( static is test value )
-    generate_resource.make_json(sitename+"/h1/",h1x_hash)
-    h1x_list = extract_data(sitename+"/h1/")
-
-    generate_resource.make_json(sitename+"/h2/",h2_hash)
-    h2_list = extract_data(sitename+"/h2/")
-
-    generate_resource.make_json(sitename+"/orgin/",origin_hash)
-    origin_list = extract_data(sitename+"/orgin/")
-
-
-    # Generate comparison data
-    return generate_data(h1x_list,h2_list,origin_list)
-
-def get_data_comparison_site_reload(sitename):
+def get_data_list_comparison_site(sitename):
     h1x_list = extract_data(sitename+"/h1/")
     h2_list = extract_data(sitename+"/h2/")
     origin_list = extract_data(sitename+"/orgin/")

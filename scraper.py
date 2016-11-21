@@ -8,13 +8,17 @@ import os
 
 def scraper(url):
     sitename = namesplit.make(url)
+    imgname = sitename + ".png"
     print(sitename)
     print("start")
     # profile = webdriver.FirefoxProfile()
     # profile.set_preference('browser.helperApps.neverAsk.saveToDisk', 'file/]unknown')
     #browser = webdriver.Firefox(firefox_profile=profile)
     browser = webdriver.Firefox()
+    browser.set_window_size(1920, 1080)
     browser.get(url)
+    imgurl = 'static/images/' + imgname
+    browser.save_screenshot(imgurl)
     pageFirst = ui.WebDriverWait(browser, 15).until(lambda browser: browser.find_element_by_tag_name('body'))
     # 서버용
     # pageFirst.send_keys(Keys.CONTROL + 's')
@@ -39,4 +43,5 @@ def scraper(url):
             break
         time.sleep(1)
         print("1")
-    transper.transper(sitename)
+
+    return transper.transper(sitename)

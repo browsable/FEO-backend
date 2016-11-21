@@ -19,5 +19,7 @@ def transper (sitename):
     h1test = 'https://h1test.net/downloads'
     h2test = 'https://h2test.net/downloads'
     params = {'sitename': sitename}
-    requests.get(h1test, params=params)
-    requests.get(h2test, params=params)
+    h1res = requests.get(h1test, params=params)
+    h2res = requests.get(h2test, params=params)
+
+    return h1res, h2res

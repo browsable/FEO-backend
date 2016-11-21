@@ -88,7 +88,7 @@
                             clearInterval(inter);
                             console.log(speed)
                             $("#icon3").attr("id", "").css("color", "green"); //done
-                            $("#icon4").attr("id", "").css("color", "skyblue"); //button
+                            $("#icon4").attr("id", "").css("color", "yellow"); //button
                             $("#icon4module").attr("href", "{{url_for('iframe',sitename=sitename)}}")
                             console.log(origin + 'iframe/{{url}}')
                             setInterval("icon4Toggle()", speed); //button
@@ -96,7 +96,7 @@
                         }
                         else if (message.data == 'icon5') {
                             $("#icon5").attr("id", "").css("color", "green");
-                            $("#icon6").attr("id", "").css("color", "skyblue");
+                            $("#icon6").attr("id", "").css("color", "yellow");
                             $("#icon6module").attr("href", "{{url_for('result',sitename=sitename)}}")
                             //console.log(origin + 'iframe/{{url}}')
                             setInterval("icon6Toggle()", speed);
@@ -354,7 +354,7 @@
                             <div class="col-md-4">
                                 <div class="info-box info-box-1 even">
                                     <div class="img flex-cc">
-                                        <a id="icon4module" href="#" target="_blank"><span id='icon4'
+                                        <a id="icon4module" href="" target="_blank"><span id='icon4'
                                                                                            class="pe-7s-photo-gallery"></span></a>
                                     </div>
                                     <div class="info">
@@ -381,7 +381,7 @@
                             <div class="col-md-4">
                                 <div class="info-box info-box-1 even">
                                     <div class="img flex-cc">
-                                        <a id="icon6module" href="#" target="_blank"><span id='icon6'
+                                        <a id="icon6module" href=""><span id='icon6'
                                                                                            class="pe-7s-display1"></span></a>
                                     </div>
                                     <div class="info">
